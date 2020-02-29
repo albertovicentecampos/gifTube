@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Main</title>
+        <h:form>      
+            <p:panel id="panel" style="margin-bottom:30px;">
+                <img src="/resources/imagenes/logo.png"></img>
+                <p:inputText id="txt1" value="#{searchView.text1}" required="true" label="Text 1">
+                    <f:validateLength minimum="2" />
+                </p:inputText>
+                <p:commandButton process="@parent:@parent" update="@form" value="Buscar" />
+                <p:message for="txt1" />
+                <h:outputText value="#{searchView.text1}" />
+
+            </p:panel>
+        </h:form>
+    </h:head>
+    <h:body>
+        <h3 style="margin-top:0">Dibujos animados</h3>
+        <p:media value="https://media.giphy.com/media/W79wfYWCTWidO/source.gif" width="420" height="315" player="quicktime"/>
+        <h:form>
+            <h:panelGrid columns="2" cellpadding="5">
+                <h:outputText value="Visitas: " />
+                <h:outputText id="output" value="#{counterView.number}" />
+            </h:panelGrid>
+
+            <p:commandButton value="Ver" action="#{counterView.increment}" update="output" />
+        </h:form>
+       
+        <p:media value="https://media.giphy.com/media/4SjlyrGuMvxxS/source.gif" width="420" height="315" player="quicktime"/> 
+        
+    </h:body>
+    
+    <footer>
+        hola
+    </footer>
+       
+</html>
+
