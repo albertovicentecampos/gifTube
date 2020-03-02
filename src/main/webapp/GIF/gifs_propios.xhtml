@@ -7,17 +7,27 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <!--Cambia el nombre al xhtml y ya empiezas haciendo tu vista y ya te tiene que ir primefaces (Tambien el welcome file)-->
+
+    <style type="text/css">
+        .ui-g body {
+            background-color: #ededed;
+            text-align: center;
+            border: 1px solid #fafafa;
+        }
+    </style>
+
     <h:head>
+
     </h:head>
 
-    <h:body>
 
+    <h:body class="ui-g">
         <table border="1">
             <tr>
                 <td>
                     <p:imageSwitch effect="zoom">
                         <ui:repeat value="#{imagesView.images}" var="image">
-                            <p:graphicImage name="resources/images/#{image}" />
+                            <p:graphicImage name="./resources/images/#{image}" />
                         </ui:repeat>
                     </p:imageSwitch>
                 </td>
@@ -40,8 +50,8 @@
                     </p:button>
                 </td>
             </tr>
-            
-                        <tr>
+
+            <tr>
                 <td>
                     <p:imageSwitch effect="zoom">
                         <ui:repeat value="#{ImagesView.images}" var="image">
@@ -68,8 +78,8 @@
                     </p:button>
                 </td>
             </tr>
-            
-                        <tr>
+
+            <tr>
                 <td>
                     <p:imageSwitch effect="zoom">
                         <ui:repeat value="#{ImagesView.images}" var="image">
@@ -96,8 +106,8 @@
                     </p:button>
                 </td>
             </tr>
-            
-                        <tr>
+
+            <tr>
                 <td>
                     <p:imageSwitch effect="zoom">
                         <ui:repeat value="#{ImagesView.images}" var="image">
@@ -124,8 +134,8 @@
                     </p:button>
                 </td>
             </tr>
-            
-                        <tr>
+
+            <tr>
                 <td>
                     <p:imageSwitch effect="zoom">
                         <ui:repeat value="#{ImagesView.images}" var="image">
@@ -152,8 +162,8 @@
                     </p:button>
                 </td>
             </tr>
-            
-                        <tr>
+
+            <tr>
                 <td>
                     <p:imageSwitch effect="zoom">
                         <ui:repeat value="#{ImagesView.images}" var="image">
@@ -180,8 +190,8 @@
                     </p:button>
                 </td>
             </tr>
-            
-                        <tr>
+
+            <tr>
                 <td>
                     <p:imageSwitch effect="zoom">
                         <ui:repeat value="#{ImagesView.images}" var="image">
@@ -208,8 +218,8 @@
                     </p:button>
                 </td>
             </tr>
-            
-                        <tr>
+
+            <tr>
                 <td>
                     <p:imageSwitch effect="zoom">
                         <ui:repeat value="#{ImagesView.images}" var="image">
@@ -236,8 +246,8 @@
                     </p:button>
                 </td>
             </tr>
-            
-                        <tr>
+
+            <tr>
                 <td>
                     <p:imageSwitch effect="zoom">
                         <ui:repeat value="#{ImagesView.images}" var="image">
@@ -264,8 +274,8 @@
                     </p:button>
                 </td>
             </tr>
-            
-                        <tr>
+
+            <tr>
                 <td>
                     <p:imageSwitch effect="zoom">
                         <ui:repeat value="#{ImagesView.images}" var="image">
@@ -292,8 +302,8 @@
                     </p:button>
                 </td>
             </tr>
-            
-                        <tr>
+
+            <tr>
                 <td>
                     <p:imageSwitch effect="zoom">
                         <ui:repeat value="#{ImagesView.images}" var="image">
