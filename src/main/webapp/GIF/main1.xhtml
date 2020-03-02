@@ -4,12 +4,18 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:outputStylesheet library="css" name="grid.css"/>
+    <h:outputStylesheet library="css" name="main.css"/>
     <h:head>
         <title>Main</title>
-        <h:form>      
-            <p:panel id="panel" style="margin-bottom:30px;">
-                <img src="/resources/imagenes/logo.png"></img>
-                <p:inputText id="txt1" value="#{searchView.text1}" required="true" label="Text 1">
+        <h:form class="cabecera">      
+            <p:panel style="margin-bottom:5px">
+                <h:graphicImage library="images" name="logo.png" height="42px" styleClass="imglogo"></h:graphicImage>
+                <h:graphicImage library="images" name="perfil.png" width="50px" height="45px" styleClass="imgperfil"></h:graphicImage>
+                <h:graphicImage library="images" name="subir.png" width="45px" height="45px" styleClass="imgperfil"></h:graphicImage>
+                <h:graphicImage library="images" name="fav.png" width="50px" height="45px" styleClass="imgperfil"></h:graphicImage>
+
+                <p:inputText styleClass="busqueda" id="txt1" value="#{searchView.text1}" required="true" label="Text 1">
                     <f:validateLength minimum="2" />
                 </p:inputText>
                 <p:commandButton process="@parent:@parent" update="@form" value="Buscar" />
@@ -20,24 +26,42 @@
         </h:form>
     </h:head>
     <h:body>
-        <h3 style="margin-top:0">Dibujos animados</h3>
-        <p:media value="https://media.giphy.com/media/W79wfYWCTWidO/source.gif" width="420" height="315" player="quicktime"/>
-        <h:form>
-            <h:panelGrid columns="2" cellpadding="5">
+        <nav>
+            <h:form> 
+                <p:menu>
+                    <p:submenu label="Menu">
+                        <p:menuitem value="Save" icon="pi pi-save" />
+                        <p:menuitem value="Update"  icon="pi pi-refresh"/>
+                    </p:submenu>        
+                    <p:submenu label="Usuario">
+                        <p:menuitem value="Mis gif" url="prueba.xhtml"   icon=""/>
+                        <p:menuitem value="Configuracion"  icon="pi pi-start"/>
+                    </p:submenu>
+
+                </p:menu>
+            </h:form>
+        </nav>
+
+        <main>
+
+            <p:media value="https://media.giphy.com/media/W79wfYWCTWidO/source.gif" width="300" height="200" player="quicktime"/>
+            <h:form>
                 <h:outputText value="Visitas: " />
                 <h:outputText id="output" value="#{counterView.number}" />
-            </h:panelGrid>
+                <p:commandButton value="Ver" action="#{counterView.increment}" update="output" />
+            </h:form>
 
-            <p:commandButton value="Ver" action="#{counterView.increment}" update="output" />
-        </h:form>
-       
-        <p:media value="https://media.giphy.com/media/4SjlyrGuMvxxS/source.gif" width="420" height="315" player="quicktime"/> 
-        
+            <p:media value="https://media.giphy.com/media/4SjlyrGuMvxxS/source.gif" width="300" height="200" player="quicktime"/> 
+        </main>
+
     </h:body>
-    
+
     <footer>
-        hola
+        <p align="center">Derechos de autor<br></br>
+            © 2020 GifTube, una empresa de DAW UJA</p>
+        <h:graphicImage library="images" name="twitter.png" width="45px" height="45px" styleClass="imgperfil"></h:graphicImage>
+        <h:graphicImage library="images" name="facebook.png" width="45px" height="45px" styleClass="imgperfil"></h:graphicImage>
     </footer>
-       
+
 </html>
 
