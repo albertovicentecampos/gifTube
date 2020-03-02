@@ -1,0 +1,22 @@
+<h:form title="Log in">
+            <h:panelGrid bgcolor="grey" columns="1">
+                <p:column/>
+                <h1 align="center">Iniciar sesión</h1>
+                
+                <p:outputLabel for="txtUsuario"  value="Usuario"/>
+                <p:inputText id="txtUsuario" required="true"/>
+                <br/>
+                
+                <p:outputLabel  for="txtClave" value="Clave"/>
+                <p:password id="txtClave" value="passwd" required="true" />
+                <p:column/>
+                <br/>
+                
+                
+                <p:commandButton value="Iniciar sesión" />
+                <br/>   
+
+                <p:link style="align-content: center" value="¿Olvidaste tu contraseña?" />
+            </h:panelGrid>
+        </h:form>
+
