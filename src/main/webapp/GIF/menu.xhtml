@@ -8,19 +8,19 @@
     </h:head>
     <h:body>
         <div class="ui-g-12 ui-md-2">
-                <h:form> 
-                    <p:menu>
-                        <p:submenu label="Menu">
-                            <p:menuitem value="Save" icon="pi pi-save" />
-                            <p:menuitem value="Update"  icon="pi pi-refresh"/>
-                        </p:submenu>        
-                        <p:submenu label="Usuario">
-                            <p:menuitem value="Mis gif" url="prueba.xhtml"   icon=""/>
-                            <p:menuitem value="Configuracion"  icon="pi pi-start"/>
-                        </p:submenu>
-                    </p:menu>
-                </h:form>
-            </div>
+            <h:form> 
+                <p:menu style="width:150px; align-content:center" > 
+                    <p:submenu label="GifTube">
+                        <p:menuitem value="Principal"  url="/GifTube/" />
+                        <p:menuitem value="Buscar tags"  url="prueba.xhtml"/>
+                    </p:submenu>        
+                    <p:submenu label="Usuario">
+                        <p:menuitem value="Mis gif" url="prueba.xhtml"/>
+                        <p:menuitem value="Configuracion" url="prueba.xhtml"/>
+                    </p:submenu>
+                </p:menu>
+            </h:form>
+        </div>
     </h:body>
 </html>
 
