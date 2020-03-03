@@ -3,49 +3,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:outputStylesheet library="css" name="grid.css"/>
     <h:outputStylesheet library="css" name="main.css"/>
 
     <div class="ui-g">
 
         <div class="ui-g-12 ui-md-12 ui-g-nopad">
-            <div class="ui-g-16">
-                <h:head>
-                    <title>Main</title>
-                    <h:form class="cabecera">      
-                        <p:panel style="margin-bottom:5px">
-                            <h:graphicImage library="images" name="logo.png" height="42px" styleClass="imglogo"></h:graphicImage>
-                            <h:graphicImage library="images" name="perfil.png" width="50px" height="45px" styleClass="imgperfil"></h:graphicImage>
-                            <h:graphicImage library="images" name="subir.png" width="45px" height="45px" styleClass="imgperfil"></h:graphicImage>
-                            <h:graphicImage library="images" name="fav.png" width="50px" height="45px" styleClass="imgperfil"></h:graphicImage>
-
-                            <p:inputText styleClass="busqueda" id="txt1" value="#{searchView.text1}" required="true" label="Text 1">
-                                <f:validateLength minimum="2" />
-                            </p:inputText>
-                            <p:commandButton process="@parent:@parent" update="@form" value="Buscar" />
-                            <p:message for="txt1" />
-                            <h:outputText value="#{searchView.text1}" />
-
-                        </p:panel>
-                    </h:form>
-                </h:head>
-            </div>
-            <div class="ui-g-12 ui-md-2">
-                <h:form> 
-                    <p:menu>
-                        <p:submenu label="Menu">
-                            <p:menuitem value="Save" icon="pi pi-save" />
-                            <p:menuitem value="Update"  icon="pi pi-refresh"/>
-                        </p:submenu>        
-                        <p:submenu label="Usuario">
-                            <p:menuitem value="Mis gif" url="prueba.xhtml"   icon=""/>
-                            <p:menuitem value="Configuracion"  icon="pi pi-start"/>
-                        </p:submenu>
-
-                    </p:menu>
-                </h:form>
-            </div>
+            <ui:include src="cabecera.xhtml"/>
+            <ui:include src="menu.xhtml"/>
 
             <div class="ui-g">
                 <div class="ui-g-6 ui-md-3"><p:media value="https://media.giphy.com/media/W79wfYWCTWidO/source.gif" width="300" height="200" player="quicktime"/>
@@ -63,17 +30,7 @@
             </div>
 
         </div>
-        <div class="ui-g-12">
-            <footer>
-                <h:graphicImage library="images" name="twitter.png" width="45px" height="45px" styleClass="imgperfil"></h:graphicImage>
-                <h:graphicImage library="images" name="facebook.png" width="45px" height="45px" styleClass="imgperfil"></h:graphicImage>
-                <br></br>
-                <p align="center">Derechos de autor<br></br>
-                    © 2020 GifTube, una empresa de DAW UJA</p>
-               
-                
-            </footer>
-        </div>
+        <ui:include src="pie.xhtml"/>
     </div>
 
 
