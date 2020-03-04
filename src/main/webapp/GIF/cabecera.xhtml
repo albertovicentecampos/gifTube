@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <div class="ui-g-16">
+                <h:head>
+                    <title>Cabecera</title>
+                    <h:form class="cabecera">      
+                        <p:panel style="margin-bottom:5px">
+                            <h:graphicImage library="images" name="logo.png" height="42px" styleClass="imglogo"></h:graphicImage>
+                            <h:graphicImage library="images" name="perfil.png" width="50px" height="45px" styleClass="imgperfil"></h:graphicImage>
+                            <h:graphicImage library="images" name="subir.png" width="45px" height="45px" styleClass="imgperfil"></h:graphicImage>
+                            <h:graphicImage library="images" name="fav.png" width="50px" height="45px" styleClass="imgperfil"></h:graphicImage>
+                            <p:inputText styleClass="busqueda" id="txt1" value="#{searchView.text1}" required="true" label="Text 1">
+                                <f:validateLength minimum="2" />
+                            </p:inputText>
+                            <p:commandButton process="@parent:@parent" update="@form" value="Buscar" />
+                            <p:message for="txt1" />
+                            <h:outputText value="#{searchView.text1}" />
+                        </p:panel>
+                    </h:form>
+                </h:head>
+            </div>
+    </h:head>
+    <h:body>
+    </h:body>
+</html>
+

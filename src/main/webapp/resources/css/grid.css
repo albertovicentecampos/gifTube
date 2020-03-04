@@ -1,0 +1,30 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 24-feb-2020, 19:37:13
+    Author     : Pacalor
+*/
+.grid-container {
+    height: auto;
+    display: grid;
+    grid-template-columns: 186px 1fr ;
+    grid-template-rows: 80px 1fr 65px;
+    grid-template-areas:
+        "hd hd "
+        "nv mn "
+        "ft ft ";
+    grid-gap: 10px;
+}
+.cabecera { grid-area: hd; }
+nav { grid-area: nv; }
+main { grid-area: mn; }
+footer { 
+    grid-area: ft;
+    background-color: gray;
+}
+
+
+
