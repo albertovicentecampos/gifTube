@@ -23,4 +23,9 @@ nav { grid-area: nv; }
 main { grid-area: mn; }
 footer { grid-area: ft; }
 
+.boton{
+    color: beige; 
+    background-color: darkslategray;
+}
+
 
