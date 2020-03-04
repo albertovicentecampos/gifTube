@@ -4,6 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:outputStylesheet library="css" name="main.css"/>
     <h:head class="cabecera">
         <title>Registrarse</title>
         <ui:include src="cabecera.xhtml"/>
@@ -11,38 +12,38 @@
     </h:head>
     <h:body class="grid-container">
         <div align="center">
-        <h:form title="Signup">
-            <p:panel>
-                <h1>Registrarse</h1>
-                
-                <p>Añade tus datos para registrarte</p>
-                <h:panelGrid columns="2">
-                    <p:outputLabel for="txtNombre"  value="Nombre"/>
-                    <p:inputText  id="txtNombre" required="true" requiredMessage="Debes completar el nombre"/>
-                    
-                    <p:outputLabel for="txtApellidos"  value="Apellidos"/>
-                    <p:inputText id="txtApellidos" required="true" requiredMessage="Debes completar los apellidos"/>
-                    
-                    
-                    <p:outputLabel for="txtUsuario"  value="Usuario"/>
-                    <p:inputText id="txtUsuario" required="true" requiredMessage="Debes completar el usuario"/>
-                    
-                    <p:outputLabel  for="txtClave" value="Clave"/>
-                    <p:password id="txtClave" value="passwd" required="true" requiredMessage="Debes completas la contraseña" />
-                    <p:outputLabel  for="txtConfirma" value="Confirmar clave"/>
-                    <p:password id="txtConfirma" value="passwd" required="true" requiredMessage="Debes completas la contraseña" />
-                    <br />
-                    <h:column/><h:column/>
-                    <p:commandButton value="Registrarse"/>
-                    <br/>
-                    <br/>
-                    <h:column/>
-                        
-                </h:panelGrid>
-                
-                    
-            </p:panel>                
-        </h:form>
+            <h:form title="Signup">
+                <p:panel>
+                    <h1>Registrarse</h1>
+
+                    <p>Añade tus datos para registrarte</p>
+                    <h:panelGrid columns="2">
+                        <p:outputLabel for="txtNombre"  value="Nombre"/>
+                        <p:inputText  id="txtNombre" required="true" requiredMessage="Debes completar el nombre"/>
+
+                        <p:outputLabel for="txtApellidos"  value="Apellidos"/>
+                        <p:inputText id="txtApellidos" required="true" requiredMessage="Debes completar los apellidos"/>
+
+
+                        <p:outputLabel for="txtUsuario"  value="Usuario"/>
+                        <p:inputText id="txtUsuario" required="true" requiredMessage="Debes completar el usuario"/>
+
+                        <p:outputLabel  for="txtClave" value="Clave"/>
+                        <p:password id="txtClave" value="passwd" required="true" requiredMessage="Debes completas la contraseña" />
+                        <p:outputLabel  for="txtConfirma" value="Confirmar clave"/>
+                        <p:password id="txtConfirma" value="passwd" required="true" requiredMessage="Debes completas la contraseña" />
+                        <br />
+                        <h:column/><h:column/>
+                        <p:commandButton value="Registrarse"/>
+                        <br/>
+                        <br/>
+                        <h:column/>
+
+                    </h:panelGrid>
+
+
+                </p:panel>                
+            </h:form>
         </div>
     </h:body>
     <ui:include src="pie.xhtml"/>

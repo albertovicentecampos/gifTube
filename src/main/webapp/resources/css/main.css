@@ -8,6 +8,10 @@ and open the template in the editor.
     Author     : Jesus
 */
 
+footer{
+    background-color: gray;
+}
+
 .imglogo{
     float: left;
     padding-right: 350px;
@@ -21,7 +25,8 @@ and open the template in the editor.
 
 .busqueda{
     position: relative;
-    width: 35%;     
+    width: 35%;
+    
 }
 
 .imgvisualiza{

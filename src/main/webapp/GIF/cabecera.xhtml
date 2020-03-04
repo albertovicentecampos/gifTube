@@ -4,20 +4,25 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+
     <h:head>
         <div class="ui-g-16">
             <h:head>
-
                 <h:form class="cabecera">      
                     <p:panel style="margin-bottom:5px">
-                        <h:graphicImage library="images" name="logo.png" height="42px" styleClass="imglogo"></h:graphicImage>
-                        <h:graphicImage library="images" name="perfil.png" width="50px" height="45px" styleClass="imgperfil"></h:graphicImage>
+                        <h:link outcome="main1.xhtml" >
+                            <h:graphicImage library="images" name="logo.png" height="42px" styleClass="imglogo"></h:graphicImage>
+                        </h:link>
+                        <h:link outcome="login.xhtml" >
+                            <h:graphicImage library="images" name="perfil.png" width="50px" height="45px" styleClass="imgperfil"></h:graphicImage>
+                        </h:link>
                         <h:link outcome="upload_gif.xhtml" >
+
                             <h:graphicImage library="images" name="subir.png" width="45px" height="45px" styleClass="imgperfil"></h:graphicImage>
                         </h:link>
-                        <h:link outcome="gifs_propios.xhtml">
-                            <h:graphicImage library="images" name="fav.png" width="50px" height="45px" styleClass="imgperfil"></h:graphicImage>
-                        </h:link>
+
+                        <h:graphicImage library="images" name="fav.png" width="50px" height="45px" styleClass="imgperfil"></h:graphicImage>
+
                         <p:inputText styleClass="busqueda" id="txt1" value="#{searchView.text1}" required="true" label="Text 1">
                             <f:validateLength minimum="2" />
                         </p:inputText>
