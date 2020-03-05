@@ -26,9 +26,11 @@
                         <p:inputText styleClass="busqueda" id="txt1" value="#{searchView.text1}" required="true" label="Text 1">
                             <f:validateLength minimum="2" />
                         </p:inputText>
+
                         <p:commandButton process="@parent:@parent" update="@form" value="Buscar" />
                         <p:message for="txt1" />
                         <h:outputText value="#{searchView.text1}" />
+
                     </p:panel>
                 </h:form>
             </h:head>

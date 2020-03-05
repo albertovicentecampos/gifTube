@@ -14,7 +14,7 @@ footer{
 
 .imglogo{
     float: left;
-    padding-right: 350px;
+    padding-right: 180px;
     align-content: center;
 }
 
@@ -25,7 +25,8 @@ footer{
 
 .busqueda{
     position: relative;
-    width: 35%;
+    width: 30%;
+    
     
 }
 
