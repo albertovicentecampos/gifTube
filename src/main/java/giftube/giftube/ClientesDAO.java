@@ -5,56 +5,21 @@
  */
 package giftube.giftube;
 
-import java.util.HashMap;
-import java.util.Map;
-import javax.enterprise.context.ApplicationScoped;
+import java.util.Date;
+import java.util.List;
 
 /**
  *
  * @author miguel
  */
-@ApplicationScoped
-public class ClientesDAO {
-    private Map<String, Cliente> clientes = null;
-
-    public ClientesDAO() {
-        clientes = new HashMap<>();
-    }
-    
-    /**
-     * @brief funcion para buscar un cliente en el mapa
-     * @param usuario usuario del cliente que se busca
-     * @return cliente buscado, o null si no lo encuentra
-     */
-    public Cliente buscaCliente(String usuario){
-        return clientes.get(usuario);
-    }
-    
-    /**
-     * @brief funcion para añadir un cliente al HashMap de clientes
-     * @param cliente cliente que queremos añadir al mapa
-     * @return true si consigue añadirlo, false si el usuario ya estaba en uso y no puede añadirse el cliente
-     */
-    public boolean altaCliente(Cliente cliente){
-        if(!clientes.containsKey(cliente.getUsuario())){
-            clientes.put(cliente.getUsuario(), cliente);
-            return true;
-        }
-        return false;
-    }
-    
-    /**
-     * @brief funcion para borrar un cliente del mapa
-     * @param usuario del cliente que queremos borrar
-     * @return true si esta en el mapa y consigue borrarlo, false en caso contrario
-     */
-    public boolean borraCliente(String usuario){
-        if(clientes.containsKey(usuario)){
-            clientes.remove(usuario);
-            return true;
-        }else{
-            return false;
-        }
-    }
-     
+public interface ClientesDAO {
+    public Cliente buscaCliente(Cliente cliente);
+    public List<Cliente> buscaTodos();
+    public boolean altaCliente(Cliente cliente);
+    public boolean borraCliente(Cliente cliente);
+    public void modificaNombre(Cliente cliente, String nombre);
+    public void modificaApellidos(Cliente cliente, String apellidos);
+    public void modificaFechaNacimiento(Cliente cliente, Date fecha);
+    public enum Genero{ HOMBRE, MUJER, OTRO };
+    public void modificaGenero(Cliente cliente, Genero genero);
 }
