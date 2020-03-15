@@ -20,7 +20,7 @@
                 </div>  
                 <div class="ui-g-4 ui-md-5" align="center">
                     <h:form>
-                        <p:panel  header="SUBIR GIF">
+                        <p:panel   header="SUBIR GIF">
                             <h:outputText value="Elige un unico archivo" />
                             <p:growl id="messages" showDetail="true" />
                             <h:form enctype="multipart/form-data">        
@@ -30,20 +30,20 @@
                             </h:form>
 
                             <h:panelGrid columns="4" cellpadding="10">
-                                <h:outputLabel for="titulo" value="Titulo gif: " />
-                                <p:inputText id="text" value="#{validationView.text}" required="true">
-                                    <f:validateLength minimum="2" maximum="5" />
+                                <h:outputLabel for="titulo" value="Titulo gif " />
+                                <p:inputText id="titulo" value="#{gif.titulo_gif}" required="true">
+                                    <f:validateLength minimum="1" maximum="50" />
                                     <p:clientValidator />
                                 </p:inputText>
-                                <p:message for="text" display="icon" />
-                                <h:outputText value="#{validationView.text}" />
-
-                                <h:outputLabel for="tag" value="Tags gif" />
-                                <p:inputText id="integer" value="#{validationView.integer}">
-                                    <p:clientValidator event="keyup"/>
+                                <p:message for="titulo"/>
+                                <h:outputText value="#{gif.titulo_gif}" />
+                             
+                                <h:outputLabel for="tag" value="Tag gif " />
+                                <p:inputText id="tag" value="#{gif.tag_gif}">
+                                    <p:clientValidator />
                                 </p:inputText>
-                                <p:message for="integer" display="icon" />
-                                <h:outputText value="#{validationView.integer}" />
+                                <p:message for="tag"/>
+                                <h:outputText value="#{gif.tag_gif}" />
                             </h:panelGrid>
 
                             <p:commandButton value="Subir" ajax="false" validateClient="true" />
