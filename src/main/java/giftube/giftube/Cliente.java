@@ -7,25 +7,45 @@ package giftube.giftube;
 
 import java.util.Date;
 import static giftube.giftube.ClientesDAO.Genero;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 
 /**
  *
  * @author miguel
  */
 public class Cliente {
+    @NotEmpty
+    @Size(min=6,max=13)
     private String usuario; ///< usuario único por cliente, nos sirve para identificar al cliente
+    
+    @Size(min=8,max=12)
+    @NotEmpty
     private String password;///< contraseña del cliente
+    
+    @Size(max=20)
+    @NotEmpty
     private String nombre;///< nombre del cliente
+    
+    @Size(max=30)
+    @NotEmpty
     private String apellidos;///< apellidos del cliente
+    
+    @Past
     private Date fechaNacimiento;///< fecha de nacimiento del cliente
+    
+    @Size(max=200)
     private String biografia;///< biografia de la cuenta del cliente
+    
     private Genero genero;///< genero del cliente
     
-
     
-    public Cliente(String usuario, String password) {
+    public Cliente(String usuario, String password, String nombre, String apellidos) {
         this.usuario = usuario;
         this.password = password;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
         this.fechaNacimiento = null;
         this.biografia = null;
         this.genero = null;
