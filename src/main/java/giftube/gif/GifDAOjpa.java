@@ -3,19 +3,40 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package giftube.giftube;
+package giftube.gif;
 
+import giftube.gif.GifDAO;
+import giftube.gif.Gif;
+
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import javax.enterprise.context.RequestScoped;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.transaction.Transactional;
 
 /**
  *
  * @author Alberto
  */
+
+@RequestScoped
+@Transactional
 public class GifDAOjpa implements GifDAO {
 
+    private final Logger logger = Logger.getLogger(GifDAOjpa.class.getName());
+    
+    @PersistenceContext
+    private EntityManager em;
+    
     private Map<Integer, Gif> gifs = null;
 
     public GifDAOjpa() {
@@ -30,7 +51,7 @@ public class GifDAOjpa implements GifDAO {
      */
     @Override
     public Gif buscarGif(Gif _gif) {
-        return gifs.get(_gif.getId_gif());
+        return em.find(Gif.class, _gif.getId_gif());
     }
 
     /**
@@ -40,7 +61,16 @@ public class GifDAOjpa implements GifDAO {
      */
     @Override
     public List<Gif> buscaTodos() {
-        return gifs.values().stream().collect(Collectors.toList());
+        List<Gif> lg = null;
+        try{
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            cq.select(cq.from(Gif.class));
+            Query q = em.createQuery(cq);
+            lg = q.getResultList();
+        }catch (Exception ex){
+                logger.log(Level.SEVERE, ex.getMessage(),ex);
+        }
+        return lg;
     }
 
     /**
@@ -49,12 +79,16 @@ public class GifDAOjpa implements GifDAO {
      * @return True si se sube correctamente, False en caso de que el gif esté ya en el mapa
      */
     @Override
+    @Transactional
     public boolean subirGif(Gif _gif) {
-        if (!gifs.containsKey(_gif.getId_gif())) {
-            gifs.put(_gif.getId_gif(), _gif);
-            return true;
+        boolean subir = false;
+        try{
+            em.persist(_gif);
+            subir = true;
+        }catch (Exception ex){
+            logger.log(Level.SEVERE,ex.getMessage(),ex);
         }
-        return false;
+        return subir;
     }
 
     /**
@@ -63,13 +97,24 @@ public class GifDAOjpa implements GifDAO {
      * @return Ture si se borra correctamente, False en caso de que el gif no se encuentre dentro del mapa
      */
     @Override
+    @Transactional
     public boolean borrarGif(Gif _gif) {
-        if (gifs.containsKey(_gif.getId_gif())) {
-            gifs.remove(_gif.getId_gif());
-            return true;
-        } else {
-            return false;
+        boolean borrado = false;
+        try {
+            Gif g = null;
+            try {
+                g = em.getReference(Gif.class, _gif.getId_gif());
+                g.getId_gif();
+            } catch (EntityNotFoundException ex) {
+                logger.log(Level.SEVERE, ex.getMessage(), ex);
+
+            }
+            em.remove(g);
+            borrado = true;
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
+        return borrado;
     }
 
     /**

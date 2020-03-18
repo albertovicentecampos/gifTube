@@ -3,11 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package giftube.giftube;
+package giftube.gif;
 
-import giftube.giftube.GifDAO.Tags;
+import giftube.gif.GifDAO.Tags;
+import java.io.Serializable;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -15,14 +21,24 @@ import javax.inject.Named;
  */
 
 
+@Entity()
 
-@Named
-@RequestScoped
-public class Gif {
+public class Gif{
+    @Id
+    @Size (min=1, max=200)
     private int id_gif; ///< ID para identificar el gif (unico para cada gif)
+    
+    @Size (min = 2, max= 20, message = "La longitud del titulo ${ValidatedValue} debe estar entre {min} y {max} caracteres")
     private String titulo_gif; ///< TITULO de cada gif
     private Tags tag_gif; ///< TAG de cada gif. Se puede entender como la categoria que puede tener el gif
-
+    private String ubicacion_gif; ///< UBICACION del gif donde se encuentra
+    
+    public Gif(){
+        id_gif = 0;
+        titulo_gif = "";
+    }
+    
+    
     public Gif(int id, String titulo, Tags tag){
         this.id_gif=id;
         this.titulo_gif=titulo;
@@ -69,7 +85,5 @@ public class Gif {
      */
     public void setTag_gif(Tags tag_gif) {
         this.tag_gif = tag_gif;
-    }
-    
-    
+    }    
 }

@@ -31,22 +31,22 @@
 
                             <h:panelGrid columns="4" cellpadding="10">
                                 <h:outputLabel for="titulo" value="Titulo gif " />
-                                <p:inputText id="titulo" value="#{gif.titulo_gif}" required="true">
+                                <p:inputText id="titulo" value="" required="true">
                                     <f:validateLength minimum="1" maximum="50" />
                                     <p:clientValidator />
                                 </p:inputText>
                                 <p:message for="titulo"/>
-                                <h:outputText value="#{gif.titulo_gif}" />
+                                <h:outputText value="" />
                              
                                 <h:outputLabel for="tag" value="Tag gif " />
-                                <p:inputText id="tag" value="#{gif.tag_gif}">
+                                <p:inputText id="tag" value="">
                                     <p:clientValidator />
                                 </p:inputText>
                                 <p:message for="tag"/>
-                                <h:outputText value="#{gif.tag_gif}" />
+                                <h:outputText value="" />
                             </h:panelGrid>
 
-                            <p:commandButton value="Subir" ajax="false" validateClient="true" />
+                            <p:commandButton value="Subir" ajax="false"/>
                         </p:panel>
                     </h:form>
                 </div> 
