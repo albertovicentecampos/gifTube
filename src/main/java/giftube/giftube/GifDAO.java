@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package giftube.gif;
+package giftube.giftube;
 
-import giftube.gif.Gif;
+import giftube.giftube.Gif;
 import java.util.List;
 
 /**

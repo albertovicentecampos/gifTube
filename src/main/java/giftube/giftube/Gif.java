@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package giftube.gif;
+package giftube.giftube;
 
-import giftube.gif.GifDAO.Tags;
+import giftube.giftube.GifDAO.Tags;
 import java.io.Serializable;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;

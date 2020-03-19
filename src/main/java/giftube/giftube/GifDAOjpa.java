@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package giftube.gif;
+package giftube.giftube;
 
-import giftube.gif.GifDAO;
-import giftube.gif.Gif;
+import giftube.giftube.GifDAO;
+import giftube.giftube.Gif;
 
 import java.io.Serializable;
 import java.util.HashMap;
