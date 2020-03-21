@@ -69,7 +69,7 @@ public class FileUploadView implements Serializable {
     }
 
     public String upload() throws Exception {
-        if (file != null) {
+        if (file != null && archivoReady) {
             FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
             FacesContext.getCurrentInstance().addMessage(null, message);
 
@@ -97,15 +97,17 @@ public class FileUploadView implements Serializable {
 
             if (gifDAO.subirGif(gif)) {
                 System.out.println("Done!");
+                return "gifs_propios.xhtml?faces-redirect=true";
             }
 
             System.out.println("Id:" + gif.getId_gif());
             System.out.println("Titulo:" + gif.getTitulo_gif());
             System.out.println("Tag:" + gif.getTag_gif());
             System.out.println("Ubicacion: " + gif.getUbicacion_gif());
-
+            
         }
-        return "gifs_propios";
+        
+        return "";
     }
 
     public void handleFileUpload(FileUploadEvent event) throws Exception {
@@ -130,7 +132,7 @@ public class FileUploadView implements Serializable {
     public String editar() {
         gifDAO.modificarTitulo(gif, gif.getTitulo_gif());
         gifDAO.modificarTag(gif, gif.getTag_gif());
-        return "gifs_propios";
+        return "gifs_propios.xhtml?faces-redirect=true";
     }
 
     public void recupera() {
