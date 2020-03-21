@@ -44,20 +44,25 @@ public class controladorCliente implements Serializable{
         return clienteDAO.buscaTodos();
     }
     
-    public void crea(){
+    public String crea(){
         logger.info("Creando cliente ");
         clienteDAO.altaCliente(cliente);
         logger.info("Nombre: " + cliente.getNombre() + " Apellidos: " + cliente.getApellidos() +
-                 "Usuario: " + cliente.getUsuario());
+                 " Usuario: " + cliente.getUsuario());
+        return "login?faces-redirect=true&usuario="+cliente.getUsuario();
     }
     
     public void borra(){
         logger.info("Borrando cliente");
-        clienteDAO.borraCliente(cliente);
-        logger.info("Cliente borrado: Usuario: " + cliente.getUsuario() + " Nombre: " + cliente.getNombre());
+        if(clienteDAO.buscaCliente(cliente) == null){
+            logger.info("No se puede borrar la cuenta porque el usuario no existe.");
+        }else{
+            clienteDAO.borraCliente(cliente);
+            logger.info("Cliente borrado: Usuario: " + cliente.getUsuario() + " Nombre: " + cliente.getNombre());
+        }
     }
     
-    public void login(){
+    public String login(){
         Cliente clienteLogeado = clienteDAO.buscaCliente(cliente);
         if(clienteLogeado == null){
             logger.info("No existe ningun cliente con el usuario: " + cliente.getUsuario());
@@ -68,9 +73,12 @@ public class controladorCliente implements Serializable{
                 logger.info("Contraseña incorrecta");
             }
         }
+        return "main1?faces-redirect=true";
     }
     
     public void editarNombre(){
-        
+        logger.info("Editando nombre");
+        clienteDAO.modificaNombre(cliente, cliente.getNombre());
+        logger.info("nuevo nombre: " + cliente.getNombre());
     }
 }
