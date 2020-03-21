@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    
+    <head>
+        <title>Configuracion</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <ui:include src="cabecera.xhtml"/>
+    <ui:include src="menu.xhtml"/>
+    <body title="Configuracion">
+        <div>
+            <p:outputLabel value="Nombre: #{ctrlCliente.cliente.nombre}"/>
+            <p:inputText autocomplete="#{ctrlCliente.cliente.nombre}" value="#{ctrlCliente.cliente.nombre}"/>
+            <p:commandButton value="Editar" action="#{ctrlCliente.editarNombre()}"/><br/>
+            <p:commandButton value="Borrar cuenta" action="#{ctrlCliente.borra()}"/>
+        </div>
+    </body>
+    <ui:include src="pie.xhtml"/>
+</html>

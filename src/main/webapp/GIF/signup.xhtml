@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:outputStylesheet library="css" name="main.css"/>
     <h:head class="cabecera">
         <title>Registrarse</title>
@@ -18,25 +19,26 @@
 
                     <p>Añade tus datos para registrarte</p>
                     <h:panelGrid columns="2">
-                        <p:outputLabel for="txtNombre"  value="Nombre"/>
-                        <p:inputText  id="txtNombre" required="true" requiredMessage="Debes completar el nombre"/>
-
+                        <p:outputLabel for="txtNombre" value="Nombre"/>
+                        <p:inputText  id="txtNombre" required="true" value="#{ctrlCliente.cliente.nombre}"></p:inputText><p:message for="txtNombre"/>
+                        
+                        
                         <p:outputLabel for="txtApellidos"  value="Apellidos"/>
-                        <p:inputText id="txtApellidos" required="true" requiredMessage="Debes completar los apellidos"/>
-
+                        <p:inputText id="txtApellidos" required="true" value="#{ctrlCliente.cliente.apellidos}"/>
 
                         <p:outputLabel for="txtUsuario"  value="Usuario"/>
-                        <p:inputText id="txtUsuario" required="true" requiredMessage="Debes completar el usuario"/>
+                        <p:inputText id="txtUsuario" required="true" value="#{ctrlCliente.cliente.usuario}"/>
 
                         <p:outputLabel  for="txtClave" value="Clave"/>
-                        <p:password id="txtClave" value="passwd" required="true" requiredMessage="Debes completas la contraseña" />
+                        <p:password id="txtClave" required="true" value="#{ctrlCliente.cliente.password}"/>
                         <p:outputLabel  for="txtConfirma" value="Confirmar clave"/>
-                        <p:password id="txtConfirma" value="passwd" required="true" requiredMessage="Debes completas la contraseña" />
+                        <p:password id="txtConfirma" required="true"/>
                         <br />
                         <h:column/><h:column/>
-                        <p:commandButton value="Registrarse"/>
+                        <p:commandButton value="Registrarse" action="#{ctrlCliente.crea()}"/>
                         <br/>
                         <br/>
+                                              
                         <h:column/>
 
                     </h:panelGrid>
@@ -46,6 +48,6 @@
             </h:form>
         </div>
     </h:body>
-    <ui:include src="pie.xhtml"/>
+    
 </html>
 
