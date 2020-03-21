@@ -6,13 +6,12 @@
 package giftube.giftube;
 
 import giftube.giftube.GifDAO.Tags;
-import java.io.Serializable;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 /**
@@ -22,10 +21,11 @@ import javax.validation.constraints.Size;
 
 
 @Entity()
-
 public class Gif{
     @Id
-    @Size (min=1, max=200)
+    @Min(1)
+    @Max(300)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id_gif; ///< ID para identificar el gif (unico para cada gif)
     
     @Size (min = 2, max= 20, message = "La longitud del titulo ${ValidatedValue} debe estar entre {min} y {max} caracteres")
@@ -36,13 +36,14 @@ public class Gif{
     public Gif(){
         id_gif = 0;
         titulo_gif = "";
+        ubicacion_gif = "";
     }
     
-    
-    public Gif(int id, String titulo, Tags tag){
+    public Gif(int id, String titulo, Tags tag,String  ubicacion ){
         this.id_gif=id;
         this.titulo_gif=titulo;
         this.tag_gif=tag;
+        this.ubicacion_gif = ubicacion;
     }
     
     /**
@@ -86,4 +87,24 @@ public class Gif{
     public void setTag_gif(Tags tag_gif) {
         this.tag_gif = tag_gif;
     }    
+
+    /**
+     * 
+     * @return 
+     */
+    public String getUbicacion_gif() {
+        return ubicacion_gif;
+    }
+
+    /**
+     * @param ubicacion_gif the ubicacion_gif to set
+     */
+    public void setUbicacion_gif(String ubicacion_gif) {
+        this.ubicacion_gif = ubicacion_gif;
+    }
+    
+    
+    
+    
+    
 }

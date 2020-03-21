@@ -21,32 +21,41 @@
                 <div class="ui-g-4 ui-md-5" align="center">
                     <h:form>
                         <p:panel  header="SUBIR GIF">
-                            <h:outputText value="Elige un unico archivo" />
+                            <h:outputText value="Seleccione primero el archivo y pulse upload" />
                             <p:growl id="messages" showDetail="true" />
-                            
-                            <h:form>  
-                                <p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}" mode="advanced" dragDropSupport="false" update="messages" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
 
-                                <p:growl id="messages" showDetail="true" />     
+                            <h:form>  
+                                <p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}"  dragDropSupport="false" update="messages" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />                                
+                                <p:growl id="messages" showDetail="true" />    
+                                <h:outputText value="Una vez cargado, Escriba un título y seleccione un tag y pulse subir" />
                             </h:form>
 
-                            <h:panelGrid columns="4" cellpadding="10">
-                                <h:outputLabel for="titulo" value="Titulo gif: " />
-                                <p:inputText id="text" >
-                                    <f:validateLength minimum="2" maximum="5" />
-                                    <p:clientValidator />
-                                </p:inputText>
+                            <h:panelGrid columns="2" cellpadding="10">
+                                
+                               
+                                <h:outputLabel for="titulo" value="Titulo gif: " style="width: 200px"/>
+                                <p:inputText id="text" value="#{fileUploadView.gif.titulo_gif}" required="true"></p:inputText>
                                 <p:message for="text" display="icon" />
                                 <h:outputText />
 
-                                <h:outputLabel for="tag" value="Tags gif" />
-                                <p:inputText id="integer" >
-                                    <p:clientValidator event="keyup"/>
-                                </p:inputText>
-                                <p:message for="integer" display="icon" />
-                                <h:outputText  />
-                            </h:panelGrid>
+                                <p:outputLabel for="@next" value="Tag gif" />
+                                <p:selectOneMenu id="console" value="#{fileUploadView.gif.tag_gif}" style="width:200px">
+                                    <f:selectItem itemLabel="Selecciona uno" itemValue="" />
+                                    <f:selectItem itemLabel="ARTE" itemValue="ARTE" />
+                                    <f:selectItem itemLabel="CINE" itemValue="CINE" />
+                                    <f:selectItem itemLabel="AMOR" itemValue="AMOR" />
+                                    <f:selectItem itemLabel="ANIMALES" itemValue="ANIMALES" />
+                                    <f:selectItem itemLabel="CIENCIAS" itemValue="CIENCIAS" />
+                                    <f:selectItem itemLabel="DEPORTES" itemValue="DEPORTES" />
+                                    <f:selectItem itemLabel="SIMBOLOS" itemValue="SIMBOLOS" />
+                                    <f:selectItem itemLabel="RELIGION" itemValue="RELIGION" />
+                                    <f:selectItem itemLabel="TERROR" itemValue="TERROR" />
+                                    <f:selectItem itemLabel="ANIMACION" itemValue="ANIMACION" />
+                                    <f:selectItem itemLabel="ENTRETENIMIENTO" itemValue="ENTRETENIMIENTO" />
+                                    <f:selectItem itemLabel="TRISTEZA" itemValue="TRISTEZA" />
+                                </p:selectOneMenu>
 
+                            </h:panelGrid>
                             <p:commandButton value="Subir" ajax="false" validateClient="true" action="#{fileUploadView.upload()}"/>
                         </p:panel>
                     </h:form>
