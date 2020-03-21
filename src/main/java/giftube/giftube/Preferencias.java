@@ -44,10 +44,6 @@ public class Preferencias implements Serializable {
     
     public String VerGif(String IdGif){
         gifcargado=IdGif;
-        
-        
-        
-        
         return "verGif.jsf";
         
     }

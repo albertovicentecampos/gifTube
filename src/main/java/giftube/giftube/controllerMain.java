@@ -8,6 +8,7 @@ package giftube.giftube;
 import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -26,10 +27,59 @@ public class controllerMain implements Serializable {
     Preferencias preferencias;
     private static final Logger logger = Logger.getLogger(controllerMain.class.getName());
     @Inject
-    private FileUploadView gifs;
+    private GifDAO gifsDAO;
+    
+    List<Gif> gifs;
+
+    private Gif gif;
     
     public controllerMain() {
     }
     
+    @PostConstruct
+    private void init() {
+        gif = new Gif();
+        gifs = gifsDAO.buscaTodos();
+    }
 
+    public List<Gif> getGifs() {
+        return gifs;
+    }
+
+    public Gif getGif() {
+        return gif;
+    }
+
+    public void setGif(Gif gif) {
+        this.gif = gif;
+    }
+    
+    public void recupera() {
+        logger.info("Buscando Gif " + gif.getTitulo_gif());
+        gif = gifsDAO.buscarGif(gif);
+        preferencias.setGifcargado(gif.getTitulo_gif());
+    }
+    
+    public void recupera(Gif _gif) {
+        logger.info("Buscando Gif " + gif.getTitulo_gif());
+        gif = gifsDAO.buscarGif(_gif);
+        preferencias.setGifcargado(gif.getTitulo_gif());
+
+    }
+
+    public String crea() {
+        logger.info("Guardando Gif");
+        gifsDAO.subirGif(gif);
+        return "main1?faces-redirect=true&titulo=" + gif.getTitulo_gif();
+    }
+
+    public void reset() {
+        gif.setId_gif(0);
+    }
+
+    public void borra(Gif _gif) {
+        logger.info("Borrando Gif");
+        gifsDAO.borrarGif(_gif);
+    }
+    
 }
