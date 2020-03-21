@@ -24,7 +24,7 @@ public class Preferencias implements Serializable {
     public Preferencias() {};
     
     private String ActualUsuarioid = "";
-    private String gifcargado = "";
+    private int gifcargado = 0;
 
     public String getActualUsuarioid() {
         return ActualUsuarioid;
@@ -34,15 +34,15 @@ public class Preferencias implements Serializable {
         this.ActualUsuarioid = ActualUsuarioid;
     }
 
-    public String getGifcargado() {
+    public int getGifcargado() {
         return gifcargado;
     }
 
-    public void setGifcargado(String gifcargado) {
+    public void setGifcargado(int gifcargado) {
         this.gifcargado = gifcargado;
     }
     
-    public String VerGif(String IdGif){
+    public String VerGif(int IdGif){
         gifcargado=IdGif;
         return "verGif.jsf";
         

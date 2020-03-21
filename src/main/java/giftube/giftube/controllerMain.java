@@ -57,20 +57,20 @@ public class controllerMain implements Serializable {
     public void recupera() {
         logger.info("Buscando Gif " + gif.getTitulo_gif());
         gif = gifsDAO.buscarGif(gif);
-        preferencias.setGifcargado(gif.getTitulo_gif());
+        preferencias.setGifcargado(gif.getId_gif());
     }
     
     public void recupera(Gif _gif) {
         logger.info("Buscando Gif " + gif.getTitulo_gif());
         gif = gifsDAO.buscarGif(_gif);
-        preferencias.setGifcargado(gif.getTitulo_gif());
+        preferencias.setGifcargado(gif.getId_gif());
 
     }
 
     public String crea() {
         logger.info("Guardando Gif");
         gifsDAO.subirGif(gif);
-        return "main1?faces-redirect=true&titulo=" + gif.getTitulo_gif();
+        return "main1?faces-redirect=true&id=" + gif.getId_gif();
     }
 
     public void reset() {
