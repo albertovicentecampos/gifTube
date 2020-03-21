@@ -11,11 +11,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import static giftube.giftube.Cliente.Genero;
+import javax.enterprise.context.ApplicationScoped;
 
 /**
  *
  * @author miguel
  */
+@ApplicationScoped
 public class ClienteDAO{
     private Map<String, Cliente> clientes = null;
     

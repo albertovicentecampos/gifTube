@@ -18,7 +18,7 @@ public class Cliente {
     public enum Genero{ Hombre, Mujer, Otro };
     
     @NotEmpty(message="Debes completar el usuario")
-    @Size(min=6,max=13, message="La longitud del usuario debe ser entre 6 y 13 caracteres")
+    @Size(min=6,max=16, message="La longitud del usuario debe ser entre 6 y 16 caracteres")
     private String usuario; ///< usuario único por cliente, nos sirve para identificar al cliente
     
     @Size(min=8,max=12, message="La longitud de la contraseña debe ser entre 8 y 12 caracteres")

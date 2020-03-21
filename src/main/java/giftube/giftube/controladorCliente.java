@@ -20,7 +20,7 @@ import javax.inject.Named;
 @Named("ctrlCliente")
 @ViewScoped
 public class controladorCliente implements Serializable{
-
+    @Inject
     private ClienteDAO clienteDAO;
     
     private static final Logger logger = Logger.getLogger(controladorCliente.class.getName());
@@ -40,15 +40,37 @@ public class controladorCliente implements Serializable{
     }
     
     public List<Cliente> getClientes() {
+        logger.info(clienteDAO.buscaTodos().toString());
         return clienteDAO.buscaTodos();
     }
     
     public void crea(){
+        logger.info("Creando cliente ");
         clienteDAO.altaCliente(cliente);
+        logger.info("Nombre: " + cliente.getNombre() + " Apellidos: " + cliente.getApellidos() +
+                 "Usuario: " + cliente.getUsuario());
     }
     
     public void borra(){
+        logger.info("Borrando cliente");
         clienteDAO.borraCliente(cliente);
+        logger.info("Cliente borrado: Usuario: " + cliente.getUsuario() + " Nombre: " + cliente.getNombre());
     }
+    
+    public void login(){
+        Cliente clienteLogeado = clienteDAO.buscaCliente(cliente);
+        if(clienteLogeado == null){
+            logger.info("No existe ningun cliente con el usuario: " + cliente.getUsuario());
+        }else{
+            if(clienteLogeado.getPassword() != cliente.getPassword()){
+                logger.info("Usuario " + cliente.getUsuario() + " logeado correctamente");
+            }else{
+                logger.info("Contraseña incorrecta");
+            }
+        }
+    }
+    
+    public void editarNombre(){
         
+    }
 }
