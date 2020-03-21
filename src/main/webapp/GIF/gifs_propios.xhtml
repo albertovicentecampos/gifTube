@@ -18,8 +18,9 @@
                     <!--Aqui escribir lo que querais, estos div's son las segmentaciones del medio, por si os hace faltan-->
                     <h:form>
                         <p:dataTable styleClass = "table table-striped" var="g" value="#{fileUploadView.devuelveTodos()}" style="width:1000px; align-content: center; text-align: center" >
-                            <p:column headerText="Gif" width="200">                                
-                                <h:graphicImage  url="#{g.ubicacion_gif}" height="150px" ></h:graphicImage>                     
+                            <p:column headerText="Gif" width="200">      
+                               
+                                <h:graphicImage library="images" name="#{g.ubicacion_gif}" height="150px" ></h:graphicImage>                     
                             </p:column>
 
                             <p:column headerText="Id">
