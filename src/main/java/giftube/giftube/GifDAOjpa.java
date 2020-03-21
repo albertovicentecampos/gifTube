@@ -33,8 +33,8 @@ public class GifDAOjpa implements GifDAO {
     public GifDAOjpa() {
         if (gifs == null) {
             gifs = new ArrayList<>();
-            gifs.add(new Gif(idGif++, "Titulo1", Tags.AMOR, "GifTube.git\\src\\main\\webapp\\resources\\images\\nature1.jpg"));
-            gifs.add(new Gif(idGif++, "Titulo2", Tags.AMOR, "GifTube.git\\src\\main\\webapp\\resources\\images\\nature1.jpg"));
+            gifs.add(new Gif(idGif++, "Titulo1", Tags.AMOR, "nature1.jpg"));
+            gifs.add(new Gif(idGif++, "Titulo2", Tags.AMOR, "nature1.jpg"));
         }
     }
 

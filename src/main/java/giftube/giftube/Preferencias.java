@@ -42,7 +42,7 @@ public class Preferencias implements Serializable {
         this.gifcargado = gifcargado;
     }
     
-    public String VerGif(int IdGif){
+    public String SeleccionarGif(int IdGif){
         gifcargado=IdGif;
         return "verGif.jsf";
         

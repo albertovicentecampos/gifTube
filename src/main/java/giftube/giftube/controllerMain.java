@@ -43,6 +43,7 @@ public class controllerMain implements Serializable {
     }
 
     public List<Gif> getGifs() {
+        gif.getUbicacion_gif();
         return gifs;
     }
 

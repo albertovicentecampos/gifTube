@@ -80,10 +80,10 @@ public class FileUploadView implements Serializable {
 
             InputStream inputStream = file.getInputstream();
             OutputStream outputStream = null;
-            String path = "C:\\Users\\Alberto\\Desktop\\";
+            String path = "C:\\Users\\Alberto\\Desktop\\GifTube.git\\src\\main\\webapp\\resources\\images\\";
 
             File file1 = new File(path + name);
-            gif.setUbicacion_gif(file1.getPath());
+            gif.setUbicacion_gif(name);
 
             System.out.println("hola");
             outputStream = new FileOutputStream(file1);
