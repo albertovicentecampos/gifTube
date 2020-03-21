@@ -24,40 +24,14 @@
                     <c:forEach var = "l" items = "#{ctrlMain.gifs}" >
                         <div class="ui-g-6 ui-md-3">
                             <h:link outcome="verGif.xhtml"> 
-                                <f:param name="zelda" value="Homer Gasolina Gratis"  />
-                                <p>${l}</p>
+                                <f:param name="zelda" value="${l.id_gif}"  />
+                                <img src="${l}" width="100%"/>
                             </h:link>
-
-                        </div>
-                        <div class="ui-g-6 ui-md-3">
-                            <h:link outcome="verGif.xhtml"> 
-                                <f:param name="zelda" value="Johnny Bravo Aburrido"  />
-                                <p>${l}</p>
-                            </h:link>
-
-                        </div>
-                        <div class="ui-g-6 ui-md-3">
-                            <h:link outcome="verGif.xhtml"> 
-                                <f:param name="zelda" value="CR7 Calmando"  />
-                                <p>${l}</p>
-                            </h:link>
-
-                        </div>
-                        <div class="ui-g-6 ui-md-3">
-                            <h:link outcome="verGif.xhtml"> 
-                                <f:param name="zelda" value="Tanque haciendo Drift"  />
-                                <p>${l}</p>
-                            </h:link>
-
+                            <p>${l.titulo_gif}</p>
                         </div>
                     </c:forEach>
-
                 </div>  
-
-
-
             </div>
-
         </div>
         <ui:include src="pie.xhtml"/>
     </div>
