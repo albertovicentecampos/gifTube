@@ -10,15 +10,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import static giftube.giftube.Cliente.Genero;
 
 /**
  *
  * @author miguel
  */
-public class ClientesDAOjpa implements ClientesDAO{
+public class ClienteDAO{
     private Map<String, Cliente> clientes = null;
     
-    public ClientesDAOjpa() {
+    
+    public ClienteDAO() {
         clientes = new HashMap<>();
     }
     
@@ -66,22 +68,18 @@ public class ClientesDAOjpa implements ClientesDAO{
         }
     }
 
-    @Override
     public void modificaNombre(Cliente cliente, String nombre) {
         clientes.get(cliente.getUsuario()).setNombre(nombre);
     }
 
-    @Override
     public void modificaApellidos(Cliente cliente, String apellidos) {
         clientes.get(cliente.getUsuario()).setApellidos(apellidos);
     }
 
-    @Override
     public void modificaFechaNacimiento(Cliente cliente, Date fecha) {
         clientes.get(cliente.getUsuario()).setFechaNacimiento(fecha);
     }
 
-    @Override
     public void modificaGenero(Cliente cliente, Genero genero) {
         clientes.get(cliente.getUsuario()).setGenero(genero);
     }

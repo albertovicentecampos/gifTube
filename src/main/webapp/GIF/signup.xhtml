@@ -19,22 +19,21 @@
                     <p>Añade tus datos para registrarte</p>
                     <h:panelGrid columns="2">
                         <p:outputLabel for="txtNombre"  value="Nombre"/>
-                        <p:inputText  id="txtNombre" required="true" requiredMessage="Debes completar el nombre"/>
+                        <p:inputText  id="txtNombre" required="true" requiredMessage="Debes completar el nombre" value="#{ctrlCliente.cliente.nombre}"/>
 
                         <p:outputLabel for="txtApellidos"  value="Apellidos"/>
-                        <p:inputText id="txtApellidos" required="true" requiredMessage="Debes completar los apellidos"/>
-
+                        <p:inputText id="txtApellidos" required="true" requiredMessage="Debes completar los apellidos" value="#{ctrlCliente.cliente.apellidos}"/>
 
                         <p:outputLabel for="txtUsuario"  value="Usuario"/>
-                        <p:inputText id="txtUsuario" required="true" requiredMessage="Debes completar el usuario"/>
+                        <p:inputText id="txtUsuario" required="true" requiredMessage="Debes completar el usuario" value="#{ctrlCliente.cliente.usuario}"/>
 
                         <p:outputLabel  for="txtClave" value="Clave"/>
-                        <p:password id="txtClave" value="passwd" required="true" requiredMessage="Debes completas la contraseña" />
+                        <p:password id="txtClave" required="true" requiredMessage="Debes completar la contraseña" value="#{ctrlCliente.cliente.password}"/>
                         <p:outputLabel  for="txtConfirma" value="Confirmar clave"/>
-                        <p:password id="txtConfirma" value="passwd" required="true" requiredMessage="Debes completas la contraseña" />
+                        <p:password id="txtConfirma" required="true" requiredMessage="Debes completar la contraseña" />
                         <br />
                         <h:column/><h:column/>
-                        <p:commandButton value="Registrarse"/>
+                        <p:commandButton value="Registrarse" action="#{ctrlCliente.crea()}"/>
                         <br/>
                         <br/>
                         <h:column/>

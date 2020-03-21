@@ -6,7 +6,6 @@
 package giftube.giftube;
 
 import java.util.Date;
-import static giftube.giftube.ClientesDAO.Genero;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
@@ -16,20 +15,22 @@ import javax.validation.constraints.Size;
  * @author miguel
  */
 public class Cliente {
-    @NotEmpty
-    @Size(min=6,max=13)
+    public enum Genero{ Hombre, Mujer, Otro };
+    
+    @NotEmpty(message="Debes completar el usuario")
+    @Size(min=6,max=13, message="La longitud del usuario debe ser entre 6 y 13 caracteres")
     private String usuario; ///< usuario único por cliente, nos sirve para identificar al cliente
     
-    @Size(min=8,max=12)
-    @NotEmpty
+    @Size(min=8,max=12, message="La longitud de la contraseña debe ser entre 8 y 12 caracteres")
+    @NotEmpty(message="Debes completar la contraseña")
     private String password;///< contraseña del cliente
     
-    @Size(max=20)
-    @NotEmpty
+    @Size(max=20, message="El tamaño máximo del nombre es de 20 caracteres")
+    @NotEmpty(message="Debes completar el nombre")
     private String nombre;///< nombre del cliente
     
-    @Size(max=30)
-    @NotEmpty
+    @Size(max=30, message="El tamaño máximo de los apellidos es de 30 caracteres")
+    @NotEmpty(message="Debes completar los apellidos")
     private String apellidos;///< apellidos del cliente
     
     @Past
@@ -40,6 +41,16 @@ public class Cliente {
     
     private Genero genero;///< genero del cliente
     
+    public Cliente() {
+        this.usuario = null;
+        this.password = null;
+        this.nombre = null;
+        this.apellidos = null;
+        this.fechaNacimiento = null;
+        this.biografia = null;
+        this.genero = null;
+        this.fechaNacimiento = null;
+    }
     
     public Cliente(String usuario, String password, String nombre, String apellidos) {
         this.usuario = usuario;

@@ -5,7 +5,6 @@
  */
 package giftube.giftube;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.Size;
 
@@ -13,7 +12,6 @@ import javax.validation.constraints.Size;
  *
  * @author Pacalor
  */
-@Entity
 public class Comentario {
     @Id  
     @Size(min=6,max=13)
