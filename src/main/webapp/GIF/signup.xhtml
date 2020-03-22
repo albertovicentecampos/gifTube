@@ -2,9 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:p="http://primefaces.org/ui">
     <h:outputStylesheet library="css" name="main.css"/>
     <h:head class="cabecera">
         <title>Registrarse</title>
@@ -19,12 +19,14 @@
 
                     <p>Añade tus datos para registrarte</p>
                     <p:message for="txtNombre"/>
+                    <p:message for="txtApellidos"/>
+                    <p:message for="txtUsuario"/>
+                    <p:message for="txtClave"/>
+                    <p:message for="txtConfirma"/>
                     <h:panelGrid columns="2">
                         <p:outputLabel for="txtNombre" value="Nombre"/>
-                        <p:inputText  id="txtNombre" required="true" value="#{ctrlCliente.cliente.nombre}"></p:inputText>
-                        
-                        
-                        
+                        <p:inputText  id="txtNombre" required="true" value="#{ctrlCliente.cliente.nombre}" label="Error"></p:inputText>
+
                         <p:outputLabel for="txtApellidos"  value="Apellidos"/>
                         <p:inputText id="txtApellidos" required="true" value="#{ctrlCliente.cliente.apellidos}"/>
 
@@ -37,7 +39,7 @@
                         <p:password id="txtConfirma" required="true"/>
                         <br />
                         <h:column/><h:column/>
-                        <p:commandButton value="Registrarse" action="#{ctrlCliente.crea()}"/>
+                        <p:commandButton value="Registrarse" ajax="false" validateClient="false" action="#{ctrlCliente.crea()}"/>
                         <br/>
                         <br/>
                                               
