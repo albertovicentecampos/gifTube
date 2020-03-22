@@ -23,6 +23,9 @@ public class controladorCliente implements Serializable{
     @Inject
     private ClienteDAO clienteDAO;
     
+    @Inject 
+    private Preferencias pref;
+    
     private static final Logger logger = Logger.getLogger(controladorCliente.class.getName());
     
     private Cliente cliente;
@@ -46,10 +49,12 @@ public class controladorCliente implements Serializable{
     
     public String crea(){
         logger.info("Creando cliente ");
-        clienteDAO.altaCliente(cliente);
+        if(clienteDAO.altaCliente(cliente)){
         logger.info("Nombre: " + cliente.getNombre() + " Apellidos: " + cliente.getApellidos() +
                  " Usuario: " + cliente.getUsuario());
         return "login?faces-redirect=true&usuario="+cliente.getUsuario();
+        }
+        else return"";
     }
     
     public void borra(){
@@ -69,11 +74,13 @@ public class controladorCliente implements Serializable{
         }else{
             if(clienteLogeado.getPassword() != cliente.getPassword()){
                 logger.info("Usuario " + cliente.getUsuario() + " logeado correctamente");
+                pref.setActualUsuarioid(clienteLogeado.getUsuario());
+                return "main1?faces-redirect=true";
             }else{
                 logger.info("Contraseña incorrecta");
             }
         }
-        return "main1?faces-redirect=true";
+        return "";
     }
     
     public void editarNombre(){

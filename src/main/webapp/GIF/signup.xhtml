@@ -18,9 +18,11 @@
                     <h1>Registrarse</h1>
 
                     <p>Añade tus datos para registrarte</p>
+                    <p:message for="txtNombre"/>
                     <h:panelGrid columns="2">
                         <p:outputLabel for="txtNombre" value="Nombre"/>
-                        <p:inputText  id="txtNombre" required="true" value="#{ctrlCliente.cliente.nombre}"></p:inputText><p:message for="txtNombre"/>
+                        <p:inputText  id="txtNombre" required="true" value="#{ctrlCliente.cliente.nombre}"></p:inputText>
+                        
                         
                         
                         <p:outputLabel for="txtApellidos"  value="Apellidos"/>
