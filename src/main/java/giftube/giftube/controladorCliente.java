@@ -35,7 +35,12 @@ public class controladorCliente implements Serializable{
     
     @PostConstruct
     public void init(){
-        cliente = new Cliente();
+        if(clienteDAO.buscaCliente(pref.getActualUsuarioid()) == null){
+            cliente = new Cliente();
+        }else{
+            cliente=clienteDAO.buscaCliente(pref.getActualUsuarioid());
+        }
+        
     }
 
     public Cliente getCliente() {
@@ -59,10 +64,11 @@ public class controladorCliente implements Serializable{
     
     public void borra(){
         logger.info("Borrando cliente");
-        if(clienteDAO.buscaCliente(cliente) == null){
+        if(clienteDAO.buscaCliente(pref.getActualUsuarioid()) == null){
             logger.info("No se puede borrar la cuenta porque el usuario no existe.");
         }else{
-            clienteDAO.borraCliente(cliente);
+            cliente=clienteDAO.buscaCliente(pref.getActualUsuarioid());
+            clienteDAO.borraCliente(pref.getActualUsuarioid());
             logger.info("Cliente borrado: Usuario: " + cliente.getUsuario() + " Nombre: " + cliente.getNombre());
         }
     }
@@ -85,7 +91,7 @@ public class controladorCliente implements Serializable{
     
     public void editarNombre(){
         logger.info("Editando nombre");
-        clienteDAO.modificaNombre(cliente, cliente.getNombre());
+        clienteDAO.modificaNombre(pref.getActualUsuarioid(), cliente.getNombre());
         logger.info("nuevo nombre: " + cliente.getNombre());
     }
 }

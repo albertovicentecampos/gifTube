@@ -35,6 +35,9 @@ public class ClienteDAO{
         return clientes.get(cliente.getUsuario());
     }
     
+    public Cliente buscaCliente(String user){
+        return clientes.get(user);
+    }
     /**
      * @brief funcion para obtener todos los clientes almacenados en el map
      * @return todos los clientes del mapa
@@ -69,21 +72,40 @@ public class ClienteDAO{
             return false;
         }
     }
-
+    public boolean borraCliente(String user){
+        if(clientes.containsKey(user)){
+            clientes.remove(user);
+            return true;
+        }else{
+            return false;
+        }
+    }
     public void modificaNombre(Cliente cliente, String nombre) {
         clientes.get(cliente.getUsuario()).setNombre(nombre);
+    }
+    public void modificaNombre(String user, String nombre) {
+        clientes.get(user).setNombre(nombre);
     }
 
     public void modificaApellidos(Cliente cliente, String apellidos) {
         clientes.get(cliente.getUsuario()).setApellidos(apellidos);
     }
+    public void modificaApellidos(String user, String apellidos) {
+        clientes.get(user).setApellidos(apellidos);
+    }
 
     public void modificaFechaNacimiento(Cliente cliente, Date fecha) {
         clientes.get(cliente.getUsuario()).setFechaNacimiento(fecha);
     }
+    public void modificaFechaNacimiento(String user, Date fecha) {
+        clientes.get(user).setFechaNacimiento(fecha);
+    }
 
     public void modificaGenero(Cliente cliente, Genero genero) {
         clientes.get(cliente.getUsuario()).setGenero(genero);
+    }
+    public void modificaGenero(String user, Genero genero) {
+        clientes.get(user).setGenero(genero);
     }
     
 }

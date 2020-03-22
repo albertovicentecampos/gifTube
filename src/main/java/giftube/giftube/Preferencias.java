@@ -45,11 +45,19 @@ public class Preferencias implements Serializable {
     public String SeleccionarGif(int IdGif){
         gifcargado=IdGif;
         return "verGif.jsf";
-        
-    }
+     
+    } 
+    
+    
+    
+  
     
     public boolean usuarioVacio(){
         return !ActualUsuarioid.equals("");
+    }
+    
+    public boolean usuario(){
+        return ActualUsuarioid.equals("");
     }
     
     public String loggout(){
