@@ -47,10 +47,7 @@
                                         <p:commandButton styleClass="btn btn-light" value="Borra" action="#{fileUploadView.borra(g)}" />
                                     </p:column>
                                     <p:column headerText="Editar">
-                                        <p:commandButton styleClass="btn btn-light" value="Borra" action="#{prefs.gifEdicion(g)}" />
-                                        <p:button styleClass="btn btn-light" value="Editar" outcome="edita_gif" >
-                                            <f:param name="id" value="#{g.id_gif}" />
-                                        </p:button>
+                                        <p:commandButton styleClass="btn btn-light" value="Editar" action="#{prefs.gifEdicion(g)}" />
                                     </p:column>
                                 </p:dataTable>
                             </c:if>
