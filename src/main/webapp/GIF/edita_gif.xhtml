@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:outputStylesheet library="css" name="grid.css"/>
+    <h:outputStylesheet library="css" name="main.css"/>
+    <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
+
+
+
+    <div class="ui-g">
+
+        <div class="ui-g-12 ui-md-12 ui-g-nopad">
+            <ui:include src="cabecera.xhtml"/>
+            <ui:include src="menu.xhtml"/>
+
+            <div class="ui-g">
+                <div class="ui-g-6 ui-md-3">
+                    <!--Aqui escribir lo que querais, estos div's son las segmentaciones del medio, por si os hace faltan-->
+                </div>  
+                <div class="ui-g-6 ui-md-3">
+                    <h:messages class="text-danger"/>
+                    <ui:fragment  rendered="#{fileUploadView.gif != null}">    
+                        <h:form >
+                            <p:panel  header="ACTUALIZAR GIF" style="width: 400px; text-align: center" >
+                                <h:outputText value="Introduzca los nuevos datos" style="align-content: center"/>
+                                <h:panelGrid columns="2" cellpadding="10">
+                                    <h:outputLabel for="titulo" value="Titulo gif: " style="width: 200px"/>
+                                    <p:inputText id="text" value="#{prefs.g.titulo_gif}" required="true"></p:inputText>
+                                    <p:message for="text" display="icon" />
+                                    <h:outputText />
+
+                                    <p:outputLabel for="@next" value="Tag gif" />
+                                    <p:selectOneMenu id="console" value="#{prefs.g.tag_gif}" style="width:200px">
+                                        <f:selectItem itemLabel="Selecciona uno" itemValue="" />
+                                        <f:selectItem itemLabel="ARTE" itemValue="ARTE" />
+                                        <f:selectItem itemLabel="CINE" itemValue="CINE" />
+                                        <f:selectItem itemLabel="AMOR" itemValue="AMOR" />
+                                        <f:selectItem itemLabel="ANIMALES" itemValue="ANIMALES" />
+                                        <f:selectItem itemLabel="CIENCIAS" itemValue="CIENCIAS" />
+                                        <f:selectItem itemLabel="DEPORTES" itemValue="DEPORTES" />
+                                        <f:selectItem itemLabel="SIMBOLOS" itemValue="SIMBOLOS" />
+                                        <f:selectItem itemLabel="RELIGION" itemValue="RELIGION" />
+                                        <f:selectItem itemLabel="TERROR" itemValue="TERROR" />
+                                        <f:selectItem itemLabel="ANIMACION" itemValue="ANIMACION" />
+                                        <f:selectItem itemLabel="ENTRETENIMIENTO" itemValue="ENTRETENIMIENTO" />
+                                        <f:selectItem itemLabel="TRISTEZA" itemValue="TRISTEZA" />
+                                    </p:selectOneMenu>
+
+                                </h:panelGrid>
+                                <p:commandButton value="Actualizar" ajax="false" validateClient="true" action="#{fileUploadView.editar()}"/>
+                                <p:button styleClass="ui-g-nopad" value="Cancelar" outcome="gifs_propios" />
+                            </p:panel>
+                        </h:form>
+                    </ui:fragment>
+                </div> 
+            </div>
+
+        </div>
+        <ui:include src="pie.xhtml"/>
+    </div>
+
+
+</html>
+

@@ -2,61 +2,78 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:outputStylesheet library="css" name="grid.css"/>
     <h:outputStylesheet library="css" name="main.css"/>
+    <!--Falla-->
 
-    <div class="ui-g">
-        <title>Subir Gif</title>
-        <div class="ui-g-12 ui-md-12 ui-g-nopad">
-            <ui:include src="cabecera.xhtml"/>
-            <ui:include src="menu.xhtml"/>
+    <h:head>
+    </h:head>
+    
+    <h:body>
+        <div class="ui-g">
+            <title>Subir Gif</title>
+            <div class="ui-g-12 ui-md-12 ui-g-nopad">
+                <ui:include src="cabecera.xhtml"/>
+                <ui:include src="menu.xhtml"/>
 
-            <div class="ui-g">
-                <div class="ui-g-6 ui-md-3">
-                    <!--Aqui escribir lo que querais, estos div's son las segmentaciones del medio, por si os hace faltan-->
-                </div>  
-                <div class="ui-g-4 ui-md-5" align="center">
-                    <h:form>
-                        <p:panel  header="SUBIR GIF">
-                            <h:outputText value="Elige un unico archivo" />
-                            <p:growl id="messages" showDetail="true" />
-                            <h:form enctype="multipart/form-data">        
-                                <p:fileUpload value="#{fileUploadView.file}" mode="simple" skinSimple="true"/>
-                                <br />
-                                <p:commandButton value="Submit" ajax="false" action="#{fileUploadView.upload}" disabled="true" />
-                            </h:form>
+                <div class="ui-g">
+                    <div class="ui-g-6 ui-md-3">
+                        <!--Aqui escribir lo que querais, estos div's son las segmentaciones del medio, por si os hace faltan-->
+                    </div>  
+                    <div class="ui-g-4 ui-md-5" align="center">
+                        <c:if test="#{prefs.usuario()}">
+                            Para poder subir un gif debes estar logueado
+                        </c:if>
+                        <h:form>
+                            <c:if test="#{prefs.usuarioVacio()}">
+                            <p:panel  header="SUBIR GIF">
+                                <h:outputText value="Seleccione primero el archivo y pulse upload" />
+                                <p:growl id="messages" showDetail="true" /> 
+                                <p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}"  dragDropSupport="false" update="messages" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />                                 
+                                <h:outputText value="Una vez cargado, Escriba un título y seleccione un tag y pulse subir" />
 
-                            <h:panelGrid columns="4" cellpadding="10">
-                                <h:outputLabel for="titulo" value="Titulo gif: " />
-                                <p:inputText id="text" value="#{validationView.text}" required="true">
-                                    <f:validateLength minimum="2" maximum="5" />
-                                    <p:clientValidator />
-                                </p:inputText>
-                                <p:message for="text" display="icon" />
-                                <h:outputText value="#{validationView.text}" />
+                                <h:panelGrid columns="2" cellpadding="10">
 
-                                <h:outputLabel for="tag" value="Tags gif" />
-                                <p:inputText id="integer" value="#{validationView.integer}">
-                                    <p:clientValidator event="keyup"/>
-                                </p:inputText>
-                                <p:message for="integer" display="icon" />
-                                <h:outputText value="#{validationView.integer}" />
-                            </h:panelGrid>
 
-                            <p:commandButton value="Subir" ajax="false" validateClient="true" />
-                        </p:panel>
-                    </h:form>
-                </div> 
+                                    <h:outputLabel for="titulo" value="Titulo gif: " style="width: 200px"/>
+                                    <p:inputText id="text" value="#{fileUploadView.gif.titulo_gif}" required="true"></p:inputText>
+                                    <p:message for="text" display="icon" />
+                                    <h:outputText />
+
+                                    <p:outputLabel for="@next" value="Tag gif" />
+                                    <p:selectOneMenu id="console" value="#{fileUploadView.gif.tag_gif}" style="width:200px">
+                                        <f:selectItem itemLabel="Selecciona uno" itemValue="" />
+                                        <f:selectItem itemLabel="ARTE" itemValue="ARTE" />
+                                        <f:selectItem itemLabel="CINE" itemValue="CINE" />
+                                        <f:selectItem itemLabel="AMOR" itemValue="AMOR" />
+                                        <f:selectItem itemLabel="ANIMALES" itemValue="ANIMALES" />
+                                        <f:selectItem itemLabel="CIENCIAS" itemValue="CIENCIAS" />
+                                        <f:selectItem itemLabel="DEPORTES" itemValue="DEPORTES" />
+                                        <f:selectItem itemLabel="SIMBOLOS" itemValue="SIMBOLOS" />
+                                        <f:selectItem itemLabel="RELIGION" itemValue="RELIGION" />
+                                        <f:selectItem itemLabel="TERROR" itemValue="TERROR" />
+                                        <f:selectItem itemLabel="ANIMACION" itemValue="ANIMACION" />
+                                        <f:selectItem itemLabel="ENTRETENIMIENTO" itemValue="ENTRETENIMIENTO" />
+                                        <f:selectItem itemLabel="TRISTEZA" itemValue="TRISTEZA" />
+                                    </p:selectOneMenu>
+                                </h:panelGrid>
+                                <p:commandButton value="Subir" ajax="false" validateClient="true" action="#{fileUploadView.upload()}"/>
+                            </p:panel>
+                            </c:if>
+                        </h:form>
+                    </div> 
+
+                </div>
 
             </div>
-
+            <ui:include src="pie.xhtml"/>
         </div>
-        <ui:include src="pie.xhtml"/>
-    </div>
-
-
+    </h:body>
 </html>
+
+
 
