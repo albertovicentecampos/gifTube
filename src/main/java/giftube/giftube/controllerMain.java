@@ -27,7 +27,7 @@ public class controllerMain implements Serializable {
     Preferencias preferencias;
     private static final Logger logger = Logger.getLogger(controllerMain.class.getName());
     @Inject
-    private GifDAO gifsDAO;
+    private GifDAOjpa gifsDAO;
     
     List<Gif> gifs;
 
@@ -39,7 +39,7 @@ public class controllerMain implements Serializable {
     @PostConstruct
     private void init() {
         gif = new Gif();
-        gifs = gifsDAO.buscaTodos();
+        gifs = gifsDAO.todos();
     }
 
     public List<Gif> getGifs() {

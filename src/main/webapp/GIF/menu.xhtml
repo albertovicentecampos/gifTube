@@ -15,7 +15,7 @@
                         <p:menuitem value="Buscar tags"  url="/GifTube/"/>
                     </p:submenu>        
                     <p:submenu label="Usuario">
-                        <p:menuitem value="Mis gif" url="/GifTube/GIF/gifs_propios.xhtml"/>
+                        <p:menuitem value="Mis gif"  outcome="gifs_propios"/>
                         <p:menuitem value="Configuracion" url="/GifTube/GIF/configuracion.xhtml"/>
                         <c:if test="#{prefs.usuarioVacio()}">
                             <p:menuitem value="Desloguearse" action="#{prefs.loggout()}"/>
