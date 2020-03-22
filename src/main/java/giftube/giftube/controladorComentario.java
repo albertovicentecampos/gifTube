@@ -92,7 +92,7 @@ public class controladorComentario implements Serializable {
         logger.info(comentario);
         c=new Comentario(user,gif,comentario, 0);
         comment.add(c);
-        return "verGif?zelda="+gif+"?faces-redirect=true";
+        return "verGif?zelda="+gif+"&faces-redirect=true";
     
     }
 

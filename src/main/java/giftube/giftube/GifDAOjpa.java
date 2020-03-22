@@ -5,11 +5,15 @@
  */
 package giftube.giftube;
 
-import giftube.giftube.GifDAO;
 import giftube.giftube.Gif;
+import giftube.giftube.Gif.Tags;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
 
@@ -20,50 +24,61 @@ import javax.transaction.Transactional;
 @ApplicationScoped
 @Transactional
 
-public class GifDAOjpa implements GifDAO {
+public class GifDAOjpa implements Serializable {
 
     private final Logger logger = Logger.getLogger(GifDAOjpa.class.getName());
 
 //    @PersistenceContext
 //    private EntityManager em;
-    private ArrayList<Gif> gifs = null;
+    //Map<String, List<Gif>> mapa_gifs;
+    
+    private Gif gif;
+    private List<Gif> gifs = null;
     private int idGif = 1;
 
-    //private Map<Integer, Gif> gifs = null;
     public GifDAOjpa() {
         if (gifs == null) {
+            //this.mapa_gifs = new HashMap<>();
+            gif = new Gif();
             gifs = new ArrayList<>();
-            gifs.add(new Gif(idGif++, "Titulo1", Tags.AMOR, "nature1.jpg"));
-            gifs.add(new Gif(idGif++, "Titulo2", Tags.AMOR, "nature1.jpg"));
+            gifs.add(new Gif("USUARIO1", idGif++, "Titulo1", Tags.AMOR, "null.gif"));
+            gifs.add(new Gif("USUARIO1", idGif++, "Titulo2", Tags.AMOR, "null.gif"));
+
         }
     }
 
-    /**
-     * @brief Funcion para buscar un gif en el mapa gifs
-     * @param _gif gif a buscar
-     * @return Devuelve el gif que ibamos buscando. Si este no lo encuentra el
-     * valor es null
-     */
-    @Override
     public Gif buscarGif(Gif _gif) {
-        Gif encontrado = null;
+
         for (Gif g : gifs) {
             if (g.getId_gif() == _gif.getId_gif()) {
-                encontrado = new Gif(g.getId_gif(), g.getTitulo_gif(), g.getTag_gif(), g.getUbicacion_gif());
+                gif = new Gif(g.getUsuario_gif(), g.getId_gif(), g.getTitulo_gif(), g.getTag_gif(), g.getUbicacion_gif());
             }
         }
-        return encontrado;
 
+        return gif;
+
+//        if (mapa_gifs.containsKey(_gif.getUsuario_gif())) {
+//            gifs = mapa_gifs.get(_gif.getUsuario_gif());
+//        } else {
+//            gifs = new ArrayList<>();
+//        }
+//
+//        for (Gif g : gifs) {
+//            if (g.getId_gif() == _gif.getId_gif()) {
+//                gif = new Gif(g.getUsuario_gif(), g.getId_gif(), g.getTitulo_gif(), g.getTag_gif(), g.getUbicacion_gif());
+//            }
+//        }
+//        return gif;
         //return gifs.get(_gif.getId_gif());
         //return em.find(Gif.class, _gif.getId_gif());
     }
 
-    
     public Gif buscarGif(int _gif) {
         Gif encontrado = null;
+
         for (Gif g : gifs) {
             if (g.getId_gif() == _gif) {
-                encontrado = new Gif(g.getId_gif(), g.getTitulo_gif(), g.getTag_gif(), g.getUbicacion_gif());
+                encontrado = new Gif(g.getUsuario_gif(), g.getId_gif(), g.getTitulo_gif(), g.getTag_gif(), g.getUbicacion_gif());
             }
         }
         return encontrado;
@@ -71,16 +86,21 @@ public class GifDAOjpa implements GifDAO {
         //return gifs.get(_gif.getId_gif());
         //return em.find(Gif.class, _gif.getId_gif());
     }
-    
-    /**
-     * @brief Función para obtener la lista de todos los gifs disponibles que
-     * hay almacenados en el mapa
-     * @return Deuelve la lista con todos los gifs
-     */
-    @Override
-    public List<Gif> buscaTodos() {
 
+    public List<Gif> todos() {
         return gifs;
+    }
+
+    public List<Gif> buscaTodos(String usuario) {
+
+        List<Gif> lista_usuario_gifs = new ArrayList<>();
+        for (Gif g : gifs) {
+            if (g.getUsuario_gif().equals(usuario)) {
+                lista_usuario_gifs.add(g);
+            }
+        }
+
+        return lista_usuario_gifs;
 
         //return gifs.values().stream().collect(Collectors.toList());
         /*
@@ -96,16 +116,18 @@ public class GifDAOjpa implements GifDAO {
         return lg;*/
     }
 
-    /**
-     * @brief Funcion para subir un gif, añadir un gif al mapa
-     * @param _gif Gif que se quiere subir
-     * @return True si se sube correctamente, False en caso de que el gif esté
-     * ya en el mapa
-     */
-    @Override
-    //@Transactional
     public boolean subirGif(Gif _gif) {
-        Gif ng = new Gif(_gif.getId_gif(), _gif.getTitulo_gif(), _gif.getTag_gif(), _gif.getUbicacion_gif());
+
+//        
+//        if (mapa_gifs.containsKey(_gif.getUsuario_gif())) {
+//            gifs = mapa_gifs.get(_gif.getUsuario_gif());
+//            gifs.add(_gif);
+//            mapa_gifs.put(_gif.getUsuario_gif(), gifs);
+//            subir = true; 
+//        } else {
+//            gifs = new ArrayList<>();
+//        }
+        Gif ng = new Gif(_gif.getUsuario_gif(), _gif.getId_gif(), _gif.getTitulo_gif(), _gif.getTag_gif(), _gif.getUbicacion_gif());
         ng.setId_gif(idGif);
         gifs.add(ng);
         _gif.setId_gif(idGif);
@@ -129,18 +151,12 @@ public class GifDAOjpa implements GifDAO {
         return subir;*/
     }
 
-    /**
-     * @brief Funcion para borrar un gif, borrar un gif del mapa
-     * @param _gif Gif que se quiere borrar
-     * @return Ture si se borra correctamente, False en caso de que el gif no se
-     * encuentre dentro del mapa
-     */
-    @Override
 //    @Transactional
     public boolean borrarGif(Gif _gif) {
+
         boolean result = false;
         for (int i = 0; i < gifs.size(); i++) {
-            if (gifs.get(i).getId_gif() == _gif.getId_gif()) {
+            if (gifs.get(i).getId_gif() == _gif.getId_gif() && gifs.get(i).getUsuario_gif() == _gif.getUsuario_gif()) {
                 gifs.remove(i);
                 result = true;
             }
@@ -172,13 +188,8 @@ public class GifDAOjpa implements GifDAO {
         return borrado;*/
     }
 
-    /**
-     * @brief Funcion para modificar el titulo de un gif
-     * @param _gif Gif que se quiere modificar el titulo
-     * @param _titulo Titulo nuevo que se quiere poner al gif anterior
-     */
-    @Override
     public void modificarTitulo(Gif _gif, String _titulo) {
+
         System.out.println("EntraTituloG");
         for (int i = 0; i < gifs.size(); i++) {
             if (gifs.get(i).getId_gif() == _gif.getId_gif()) {
@@ -187,16 +198,25 @@ public class GifDAOjpa implements GifDAO {
             }
         }
 
+//        if (mapa_gifs.containsKey(_gif.getUsuario_gif())) {
+//            System.out.println("EntraTituloG");
+//            gifs = mapa_gifs.get(_gif.getUsuario_gif());
+//        } else {
+//            gifs = new ArrayList<>();
+//        }
+//
+//        for (int i = 0; i < gifs.size(); i++) {
+//            if (gifs.get(i).getId_gif() == _gif.getId_gif()) {
+//                System.out.println("Lo cambia");
+//                gifs.get(i).setTitulo_gif(_titulo);
+//
+//            }
+//        }
         //gifs.get(_gif.getId_gif()).setTitulo_gif(_titulo);
     }
 
-    /**
-     * @brief Función para modificar la categoria (Tag) del gif
-     * @param _gif Gif que se quiere modificar el tag
-     * @param _tag Tag nuevo que se quiere poner al gif anterior
-     */
-    @Override
     public void modificarTag(Gif _gif, Tags _tag) {
+
         System.out.println("EntraTAG");
         for (int i = 0; i < gifs.size(); i++) {
             if (gifs.get(i).getId_gif() == _gif.getId_gif()) {
@@ -204,14 +224,28 @@ public class GifDAOjpa implements GifDAO {
                 gifs.get(i).setTag_gif(_tag);
             }
         }
-        //gifs.get(_gif.getId_gif()).setTag_gif(_tag);
 
+//        if (mapa_gifs.containsKey(_gif.getUsuario_gif())) {
+//            System.out.println("EntraTAG");
+//            gifs = mapa_gifs.get(_gif.getUsuario_gif());
+//        } else {
+//            gifs = new ArrayList<>();
+//        }
+//
+//        for (int i = 0; i < gifs.size(); i++) {
+//            if (gifs.get(i).getId_gif() == _gif.getId_gif()) {
+//                System.out.println("Lo cambia");
+//                gifs.get(i).setTag_gif(_tag);
+//
+//            }
+//        }
+        //gifs.get(_gif.getId_gif()).setTag_gif(_tag);
         //gifs.get(_gif.getId_gif()).setTag_gif(_tag);
     }
 
     public boolean guarda(Gif _gif) {
         boolean result = false;
-        Gif nc = new Gif(_gif.getId_gif(), _gif.getTitulo_gif(), _gif.getTag_gif(), _gif.getUbicacion_gif());
+        Gif nc = new Gif(_gif.getUsuario_gif(),_gif.getId_gif(), _gif.getTitulo_gif(), _gif.getTag_gif(), _gif.getUbicacion_gif());
         for (int i = 0; i < gifs.size(); i++) {
             if (gifs.get(i).getId_gif() == nc.getId_gif()) {
                 gifs.set(i, nc);
@@ -219,6 +253,7 @@ public class GifDAOjpa implements GifDAO {
             }
         }
         return result;
+
     }
 
 }

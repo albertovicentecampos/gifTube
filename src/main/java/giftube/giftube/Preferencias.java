@@ -26,6 +26,19 @@ public class Preferencias implements Serializable {
     private String ActualUsuarioid = "";
     private int gifcargado = 0;
 
+
+    private Gif g; 
+
+    public Gif getG() {
+        return g;
+    }
+    
+    
+    public String gifEdicion(Gif _g){
+        g = _g;
+        return "edita_gif?faces-redirect=true";
+    }
+
     public String getActualUsuarioid() {
         return ActualUsuarioid;
     }
@@ -45,21 +58,18 @@ public class Preferencias implements Serializable {
     public String SeleccionarGif(int IdGif){
         gifcargado=IdGif;
         return "verGif.jsf";
-     
-    } 
-    
-    
-    
-  
+
+        
+    }
     
     public boolean usuarioVacio(){
         return !ActualUsuarioid.equals("");
     }
-    
+
     public boolean usuario(){
         return ActualUsuarioid.equals("");
     }
-    
+
     public String loggout(){
         ActualUsuarioid="";
         return "main1?faces-redirect=true";
