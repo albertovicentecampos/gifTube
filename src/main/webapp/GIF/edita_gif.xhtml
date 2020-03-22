@@ -9,6 +9,8 @@
     <h:outputStylesheet library="css" name="main.css"/>
     <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
 
+
+
     <div class="ui-g">
 
         <div class="ui-g-12 ui-md-12 ui-g-nopad">
@@ -20,7 +22,6 @@
                     <!--Aqui escribir lo que querais, estos div's son las segmentaciones del medio, por si os hace faltan-->
                 </div>  
                 <div class="ui-g-6 ui-md-3">
-                    
                     <h:messages class="text-danger"/>
                     <ui:fragment  rendered="#{fileUploadView.gif != null}">    
                         <h:form >
@@ -28,12 +29,12 @@
                                 <h:outputText value="Introduzca los nuevos datos" style="align-content: center"/>
                                 <h:panelGrid columns="2" cellpadding="10">
                                     <h:outputLabel for="titulo" value="Titulo gif: " style="width: 200px"/>
-                                    <p:inputText id="text" value="#{fileUploadView.gif.titulo_gif}" required="true"></p:inputText>
+                                    <p:inputText id="text" value="#{prefs.g.titulo_gif}" required="true"></p:inputText>
                                     <p:message for="text" display="icon" />
                                     <h:outputText />
 
                                     <p:outputLabel for="@next" value="Tag gif" />
-                                    <p:selectOneMenu id="console" value="#{fileUploadView.gif.tag_gif}" style="width:200px">
+                                    <p:selectOneMenu id="console" value="#{prefs.g.tag_gif}" style="width:200px">
                                         <f:selectItem itemLabel="Selecciona uno" itemValue="" />
                                         <f:selectItem itemLabel="ARTE" itemValue="ARTE" />
                                         <f:selectItem itemLabel="CINE" itemValue="CINE" />

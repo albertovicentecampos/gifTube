@@ -92,17 +92,19 @@ public class FileUploadView implements Serializable {
 
             System.out.println("Uploaded file now: " + file.getFileName());
             
-            //gif.setUsuario_gif(usuario);
+            gif.setUsuario_gif(usuario);
            
             String name = gif.getTitulo_gif() + ".gif";
-            //gif.setId_gif(0);
+            gif.setId_gif(0);
 
+            //gif = new Gif(usuario,0,titulo,tag,name);
+            
             InputStream inputStream = file.getInputstream();
             OutputStream outputStream = null;
             String path = "C:\\Users\\Alberto\\Desktop\\GifTube.git\\src\\main\\webapp\\resources\\images\\";
 
             File file1 = new File(path + name);
-            //gif.setUbicacion_gif(name);
+            gif.setUbicacion_gif(name);
 
             System.out.println("hola");
             outputStream = new FileOutputStream(file1);
@@ -114,7 +116,7 @@ public class FileUploadView implements Serializable {
                 outputStream.write(bytes, 0, read);
             }
 
-            gif = new Gif(usuario,0,titulo,tag,name);
+            
             
             if (gifDAO.subirGif(gif)) {
                 System.out.println("Done!");

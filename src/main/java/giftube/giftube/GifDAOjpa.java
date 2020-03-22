@@ -41,8 +41,8 @@ public class GifDAOjpa implements Serializable {
             //this.mapa_gifs = new HashMap<>();
             gif = new Gif();
             gifs = new ArrayList<>();
-            gifs.add(new Gif("USUARIO1", idGif++, "Titulo1", Tags.AMOR, "nature1.jpg"));
-            gifs.add(new Gif("USUARIO1", idGif++, "Titulo2", Tags.AMOR, "nature1.jpg"));
+            gifs.add(new Gif("USUARIO1", idGif++, "Titulo1", Tags.AMOR, "null.gif"));
+            gifs.add(new Gif("USUARIO1", idGif++, "Titulo2", Tags.AMOR, "null.gif"));
 
         }
     }

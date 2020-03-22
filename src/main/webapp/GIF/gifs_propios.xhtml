@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:outputStylesheet library="css" name="grid.css"/>
     <h:outputStylesheet library="css" name="main.css"/>
     <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
@@ -18,35 +19,41 @@
                 <ui:include src="cabecera.xhtml"/>
                 <ui:include src="menu.xhtml"/>
                 <div class="ui-g">
-                    <div class="ui-g-6 ui-md-3">                        
+                    <div class="ui-g-6 ui-md-3">    
+                        <c:if test="#{prefs.usuario()}">
+                            Para poder subir un gif debes estar logueado
+                        </c:if>
                         <h:form>
-                            <p:dataTable styleClass = "table table-striped" var="g"  value="#{fileUploadView.devuelveTodos()}" style="width:1000px; align-content: center; text-align: center" >
-                                <p:column headerText="Gif" width="200">      
+                            <c:if test="#{prefs.usuarioVacio()}">
+                                <p:dataTable styleClass = "table table-striped" var="g"  value="#{fileUploadView.devuelveTodos()}" style="width:1000px; align-content: center; text-align: center" >
+                                    <p:column headerText="Gif" width="200">      
 
-                                    <h:graphicImage library="images" name="#{g.ubicacion_gif}" height="150px" ></h:graphicImage>                     
-                                </p:column>
+                                        <h:graphicImage library="images" name="#{g.ubicacion_gif}" height="150px" ></h:graphicImage>                     
+                                    </p:column>
 
-                                <p:column headerText="Id">
-                                    <h:outputText value="#{g.id_gif}" />
-                                </p:column>
+                                    <p:column headerText="Id">
+                                        <h:outputText value="#{g.id_gif}" />
+                                    </p:column>
 
-                                <p:column headerText="Titulo">
-                                    <h:outputText value="#{g.titulo_gif}" />
-                                </p:column>
+                                    <p:column headerText="Titulo">
+                                        <h:outputText value="#{g.titulo_gif}" />
+                                    </p:column>
 
-                                <p:column headerText="Tag">
-                                    <h:outputText value="#{g.tag_gif}" />
-                                </p:column>
+                                    <p:column headerText="Tag">
+                                        <h:outputText value="#{g.tag_gif}" />
+                                    </p:column>
 
-                                <p:column headerText="Borrar">
-                                    <p:commandButton styleClass="btn btn-light" value="Borra" action="#{fileUploadView.borra(g)}" />
-                                </p:column>
-                                <p:column headerText="Editar">
-                                    <p:button styleClass="btn btn-light" value="Editar" outcome="edita_gif" >
-                                        <f:param name="id" value="#{g.id_gif}" />
-                                    </p:button>
-                                </p:column>
-                            </p:dataTable>
+                                    <p:column headerText="Borrar">
+                                        <p:commandButton styleClass="btn btn-light" value="Borra" action="#{fileUploadView.borra(g)}" />
+                                    </p:column>
+                                    <p:column headerText="Editar">
+                                        <p:commandButton styleClass="btn btn-light" value="Borra" action="#{prefs.gifEdicion(g)}" />
+                                        <p:button styleClass="btn btn-light" value="Editar" outcome="edita_gif" >
+                                            <f:param name="id" value="#{g.id_gif}" />
+                                        </p:button>
+                                    </p:column>
+                                </p:dataTable>
+                            </c:if>
                         </h:form>
                     </div>  
                     <div class="ui-g-6 ui-md-3">
