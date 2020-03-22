@@ -20,13 +20,6 @@
                     <!--Aqui escribir lo que querais, estos div's son las segmentaciones del medio, por si os hace faltan-->
                 </div>  
                 <div class="ui-g-6 ui-md-3">
-
-                    <ui:define name="metadata">
-                        <f:metadata>
-                            <f:viewParam name="id" value="#{fileUploadView.gif.id_gif}"/>
-                            <f:viewAction action="#{fileUploadView.recupera()}" />
-                        </f:metadata>               
-                    </ui:define>
                     
                     <h:messages class="text-danger"/>
                     <ui:fragment  rendered="#{fileUploadView.gif != null}">    

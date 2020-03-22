@@ -11,13 +11,6 @@
 
     <h:head>
         <Title>Gifs de #{fileUploadView.usuario}</Title>
-        <ui:define name="metadata">
-            <f:metadata>
-                <f:viewParam name="id"  required="true" 
-                             value="#{fileUploadView.usuario}"/>
-                <f:viewAction action="#{fileUploadView.recupera()}" />
-            </f:metadata>               
-        </ui:define>
     </h:head>
     <h:body>
         <div class="ui-g">

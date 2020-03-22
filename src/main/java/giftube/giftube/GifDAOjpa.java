@@ -95,7 +95,7 @@ public class GifDAOjpa implements Serializable {
 
         List<Gif> lista_usuario_gifs = new ArrayList<>();
         for (Gif g : gifs) {
-            if (g.getUsuario_gif() == usuario) {
+            if (g.getUsuario_gif().equals(usuario)) {
                 lista_usuario_gifs.add(g);
             }
         }

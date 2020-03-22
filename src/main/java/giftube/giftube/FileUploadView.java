@@ -61,8 +61,8 @@ public class FileUploadView implements Serializable {
     @PostConstruct
     public void init() {
         gif = new Gif();
-        setUsuario(prefer.getActualUsuarioid());
-
+        //setUsuario(prefer.getActualUsuarioid());
+        usuario=prefer.getActualUsuarioid();
     }
 
     public UploadedFile getFile() {
@@ -140,6 +140,7 @@ public class FileUploadView implements Serializable {
     }
 
     public List<Gif> devuelveTodos() {
+        lista_gifs = gifDAO.buscaTodos(usuario);
         return lista_gifs;
     }
 

@@ -51,7 +51,9 @@ public class Preferencias implements Serializable {
     public boolean usuarioVacio(){
         return !ActualUsuarioid.equals("");
     }
-    
+    public boolean usuario(){
+        return ActualUsuarioid.equals("");
+    }
     public String loggout(){
         ActualUsuarioid="";
         return "main1?faces-redirect=true";
