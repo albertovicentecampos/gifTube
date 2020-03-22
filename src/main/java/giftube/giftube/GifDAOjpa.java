@@ -58,6 +58,20 @@ public class GifDAOjpa implements GifDAO {
         //return em.find(Gif.class, _gif.getId_gif());
     }
 
+    
+    public Gif buscarGif(int _gif) {
+        Gif encontrado = null;
+        for (Gif g : gifs) {
+            if (g.getId_gif() == _gif) {
+                encontrado = new Gif(g.getId_gif(), g.getTitulo_gif(), g.getTag_gif(), g.getUbicacion_gif());
+            }
+        }
+        return encontrado;
+
+        //return gifs.get(_gif.getId_gif());
+        //return em.find(Gif.class, _gif.getId_gif());
+    }
+    
     /**
      * @brief Función para obtener la lista de todos los gifs disponibles que
      * hay almacenados en el mapa

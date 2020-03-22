@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
     </h:head>
     <h:body>
@@ -17,7 +18,10 @@
                         <p:menuitem value="Mis gif" url="/GifTube/GIF/gifs_propios.xhtml"/>
                         <p:menuitem value="Configuracion" url="/GifTube/GIF/configuracion.xhtml"/>
                         <p:menuitem value="Mis gif" outcome="gifs_propios" />
-                        <p:menuitem value="Configuracion" url="/GifTube/"/>
+                        <p:menuitem value="Configuracion" url="/GifTube/GIF/configuracion.xhtml"/>
+                        <c:if test="#{prefs.usuarioVacio()}">
+                            <p:menuitem value="Desloguearse" action="#{prefs.loggout()}"/>
+                        </c:if>
                     </p:submenu>
                 </p:menu>
             </h:form>

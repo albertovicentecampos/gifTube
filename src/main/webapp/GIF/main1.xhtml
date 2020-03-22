@@ -25,9 +25,9 @@
                         <div class="ui-g-6 ui-md-3">
                             <h:link outcome="verGif.xhtml"> 
                                 <f:param name="zelda" value="${l.id_gif}"  />
-                                <img src="${l}" width="100%"/>
+                                <h:graphicImage library="images" name="${l.ubicacion_gif}" width="100%" ></h:graphicImage>  
                             </h:link>
-                            <p>${l.titulo_gif}</p>
+                            <p align="center">${l.titulo_gif}</p>
                         </div>
                     </c:forEach>
                 </div>  

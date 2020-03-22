@@ -47,4 +47,13 @@ public class Preferencias implements Serializable {
         return "verGif.jsf";
         
     }
+    
+    public boolean usuarioVacio(){
+        return !ActualUsuarioid.equals("");
+    }
+    
+    public String loggout(){
+        ActualUsuarioid="";
+        return "main1?faces-redirect=true";
+    }
 }
