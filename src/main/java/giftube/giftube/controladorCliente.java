@@ -21,7 +21,7 @@ import javax.inject.Named;
 @ViewScoped
 public class controladorCliente implements Serializable{
     @Inject
-    private ClienteDAO clienteDAO;
+    private ClienteDAOJPA clienteDAO;
     
     @Inject 
     private Preferencias pref;
@@ -35,12 +35,12 @@ public class controladorCliente implements Serializable{
     
     @PostConstruct
     public void init(){
-        if(clienteDAO.buscaCliente(pref.getActualUsuarioid()) == null){
+        /*if(clienteDAO.buscaCliente(pref.getActualUsuarioid()) == null){
             cliente = new Cliente();
         }else{
-            cliente=clienteDAO.buscaCliente(pref.getActualUsuarioid());
-        }
-        
+            cliente = clienteDAO.buscaCliente(pref.getActualUsuarioid());
+        }*/
+        cliente = new Cliente();
     }
 
     public Cliente getCliente() {
@@ -89,9 +89,10 @@ public class controladorCliente implements Serializable{
         return "";
     }
     
-    public void editarNombre(){
+    public String editarNombre(){
         logger.info("Editando nombre");
         clienteDAO.modificaNombre(pref.getActualUsuarioid(), cliente.getNombre());
         logger.info("nuevo nombre: " + cliente.getNombre());
+        return "configuracion?faces-redirect=true";
     }
 }
