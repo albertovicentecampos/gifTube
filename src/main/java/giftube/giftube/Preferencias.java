@@ -25,12 +25,21 @@ public class Preferencias implements Serializable {
     
     private String ActualUsuarioid = "";
     private int gifcargado = 0;
-
+    
+    Cliente c = new Cliente();
 
     private Gif g; 
 
     public Gif getG() {
         return g;
+    }
+
+    public Cliente getC() {
+        return c;
+    }
+
+    public void setC(Cliente c) {
+        this.c = c;
     }
     
     
