@@ -63,6 +63,7 @@ public class FileUploadView implements Serializable {
         gif = new Gif();
         //setUsuario(prefer.getActualUsuarioid());
         usuario=prefer.getActualUsuarioid();
+        lista_gifs = gifDAO.todos();
     }
 
     public UploadedFile getFile() {
@@ -95,7 +96,7 @@ public class FileUploadView implements Serializable {
             gif.setUsuario_gif(usuario);
            
             String name = gif.getTitulo_gif() + ".gif";
-            gif.setId_gif(0);
+            //gif.setId_gif(0);
 
             //gif = new Gif(usuario,0,titulo,tag,name);
             
@@ -116,8 +117,6 @@ public class FileUploadView implements Serializable {
                 outputStream.write(bytes, 0, read);
             }
 
-            
-            
             if (gifDAO.subirGif(gif)) {
                 System.out.println("Done!");
                 return "gifs_propios.xhtml?faces-redirect=true";
@@ -141,6 +140,11 @@ public class FileUploadView implements Serializable {
         file = event.getFile();
     }
 
+    public List<Gif> prueba(){
+        lista_gifs = gifDAO.todos();
+        return lista_gifs;
+    }
+    
     public List<Gif> devuelveTodos() {
         lista_gifs = gifDAO.buscaTodos(usuario);
         return lista_gifs;

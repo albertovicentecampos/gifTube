@@ -24,6 +24,7 @@ public class ClienteDAO{
     
     public ClienteDAO() {
         clientes = new HashMap<>();
+        clientes.put("USUARIO", new Cliente("USUARIO", "1q2w3e4r","Alberto","Vicente"));
     }
     
     /**
