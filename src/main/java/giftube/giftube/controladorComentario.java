@@ -25,10 +25,13 @@ import javax.validation.constraints.Size;
 public class controladorComentario implements Serializable {
     
     @Inject
-    private comentarioDAOMap comment;
+    private comentarioDAO comment;
     
     @Inject
     private GifDAOjpa gDAO;
+    
+    @Inject
+    private VotoDAO vDAO;
     
     @Inject
     private Preferencias prefer;
@@ -40,6 +43,7 @@ public class controladorComentario implements Serializable {
     @Size(min=3,message = "La longitud del comentario debe  ser mayor 2 caracteres")
     private String comentario;
     
+    private boolean voto;
     private String nombre;
     private String url;
     private String user;
@@ -55,6 +59,7 @@ public class controladorComentario implements Serializable {
         this.nombre="prueba";
         this.url="https://media.giphy.com/media/W79wfYWCTWidO/source.gif";
         this.user="error";
+        this.voto=false;
     }
     
     @PostConstruct
@@ -70,6 +75,7 @@ public class controladorComentario implements Serializable {
         url=ver.getUbicacion_gif();
         nombre=ver.getTitulo_gif();
         already=comment.alreadyComent(user, gif);
+        this.voto=vDAO.alreadyVote(user, gif);
     }
     
     public String getComentario() {
@@ -90,7 +96,7 @@ public class controladorComentario implements Serializable {
     
     public String crea(){
         logger.info(comentario);
-        c=new Comentario(user,gif,comentario, 0);
+        c=new Comentario(user,gif,comentario);
         comment.add(c);
         return "verGif?zelda="+gif+"&faces-redirect=true";
     
@@ -127,6 +133,37 @@ public class controladorComentario implements Serializable {
 
     public void setAlready(boolean already) {
         this.already = already;
+    }
+
+    public boolean isVoto() {
+        return voto;
+    }
+    
+    public void votarUP(){
+        if(prefer.usuarioVacio()){
+            if(voto){
+                Voto aux=new Voto(user,gif);
+                vDAO.add(aux);
+                //incrementar en 1 el voto gDAO.voto(1);
+            }else{
+                //incrementar voto en 2
+            }
+        }
+    }
+    public void votarDOWN(){
+        if(prefer.usuarioVacio()){
+            if(voto){
+                Voto aux=new Voto(user,gif);
+                vDAO.add(aux);
+                //decrementar en 1 el voto gDAO.voto(1);
+            }else{
+                //decrementar voto en 2
+            }
+        }
+    }
+
+    public void setVoto(boolean voto) {
+        this.voto = voto;
     }
     
 }
