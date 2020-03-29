@@ -59,6 +59,8 @@ public class Gif{
         this.titulo_gif=titulo;
         this.tag_gif=tag;
         this.ubicacion_gif = ubicacion;
+        this.likes = 0;
+        this.dislikes = 0;
     }
 
     public String getUsuario_gif() {

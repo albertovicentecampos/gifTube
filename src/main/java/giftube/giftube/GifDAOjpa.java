@@ -101,6 +101,7 @@ public class GifDAOjpa implements Serializable {
         return lg;
     }
 
+    
     public void modificarTitulo(Gif _gif, String _titulo) {
 //        String gifSQL = "update Gif g set g.titulo_gif=:tit where g.id_gif=:iden";
 //        try {
@@ -110,11 +111,20 @@ public class GifDAOjpa implements Serializable {
 //        }
 
         try {
-            Gif g = _gif;
+            Gif g = em.find(Gif.class,_gif.getId_gif());
             g.setTitulo_gif(_titulo);
-            _gif = em.merge(g);
+            
+            //borrado = true;
+//            _gif.setTitulo_gif(_titulo);
+//            _gif.setUbicacion_gif(_titulo+".gif");
+//            System.out.println("SE HA REALIZADO");
+//            _gif = em.merge(_gif);
+
+            //Gif g = new Gif(_gif.getUsuario_gif(),_gif.getId_gif(), _titulo, _gif.getTag_gif(), _titulo+".gif");
+            
+         
         } catch (Exception ex) {
-            logger.log(Level.SEVERE, ex.getMessage());
+            logger.log(Level.SEVERE, "No se ha podido realizar el cambio de titulo para el gif");
         }
 
 //        try {

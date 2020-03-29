@@ -49,7 +49,6 @@ public class FileUploadView implements Serializable {
     
     private List<Gif> lista_gifs;
     
-
     private static final Logger logger = Logger.getLogger(FileUploadView.class.getName());
 
     public FileUploadView() {
@@ -64,6 +63,8 @@ public class FileUploadView implements Serializable {
         //setUsuario(prefer.getActualUsuarioid());
         usuario=prefer.getActualUsuarioid();
         lista_gifs = gifDAO.todos();
+//        lista_gifs=new ArrayList<>();
+//        this.archivoReady = false;
     }
 
     public UploadedFile getFile() {
@@ -96,7 +97,7 @@ public class FileUploadView implements Serializable {
             gif.setUsuario_gif(usuario);
            
             String name = gif.getTitulo_gif() + ".gif";
-            //gif.setId_gif(0);
+            gif.setId_gif(0);
 
             //gif = new Gif(usuario,0,titulo,tag,name);
             
@@ -107,6 +108,9 @@ public class FileUploadView implements Serializable {
             File file1 = new File(path + name);
             gif.setUbicacion_gif(name);
 
+            gif.setLikes(0);
+            gif.setDislikes(0);
+            
             System.out.println("hola");
             outputStream = new FileOutputStream(file1);
 
@@ -158,13 +162,14 @@ public class FileUploadView implements Serializable {
     }
 
     public String editar() {
-        gifDAO.modificarTitulo(gif, gif.getTitulo_gif());
-        gifDAO.modificarTag(gif, gif.getTag_gif());
+        gifDAO.modificarTitulo(prefer.getG(), gif.getTitulo_gif());
+        logger.info("Nuevo titulo: " + gif.getTitulo_gif());
+//        gifDAO.modificarTitulo(gif, gif.getTitulo_gif());
+//        gifDAO.modificarTag(gif, gif.getTag_gif());
         return "gifs_propios.xhtml?faces-redirect=true";
     }
-
-    public void recupera() {
-        
+    
+    public void recupera() { 
         lista_gifs = gifDAO.gifBuscaUsuario(usuario);
         gif = gifDAO.buscarGif(gif);
         
