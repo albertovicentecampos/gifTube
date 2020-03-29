@@ -25,13 +25,19 @@ public class Preferencias implements Serializable {
     
     private String ActualUsuarioid = "";
     private int gifcargado = 0;
-    
-    Cliente c = new Cliente();
 
+    private Cliente c;
+    
     private Gif g; 
 
     public Gif getG() {
         return g;
+    }
+    
+    
+    public String gifEdicion(Gif _g){
+        g = _g;
+        return "edita_gif?faces-redirect=true";
     }
 
     public Cliente getC() {
@@ -42,12 +48,6 @@ public class Preferencias implements Serializable {
         this.c = c;
     }
     
-    
-    public String gifEdicion(Gif _g){
-        g = _g;
-        return "edita_gif?faces-redirect=true";
-    }
-
     public String getActualUsuarioid() {
         return ActualUsuarioid;
     }
