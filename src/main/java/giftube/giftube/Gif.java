@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
@@ -25,7 +26,7 @@ public class Gif{
     public enum Tags {ARTE, CINE, AMOR, ANIMALES, CIENCIAS, DEPORTES, SIMBOLOS, RELIGION, TERROR, ANIMACION, ENTRETENIMIENTO, TRISTEZA};
     @Id
     @Min(0)
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id_gif; ///< ID para identificar el gif (unico para cada gif)
     
     @Size (min=6, max=13)
@@ -38,10 +39,18 @@ public class Gif{
     
     private String ubicacion_gif; ///< UBICACION del gif donde se encuentra
     
+    private int likes;
+    
+    private int dislikes;
+    
     public Gif(){
         usuario_gif = "usuario";
+        id_gif = 0; 
         titulo_gif = "";
         ubicacion_gif = "";
+        
+        likes = 0;
+        dislikes = 0;
     }
     
     public Gif(String usuario,int id, String titulo, Tags tag,String  ubicacion ){
@@ -92,5 +101,23 @@ public class Gif{
     public void setUbicacion_gif(String ubicacion_gif) {
         this.ubicacion_gif = ubicacion_gif;
     }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
+    public int getDislikes() {
+        return dislikes;
+    }
+
+    public void setDislikes(int dislikes) {
+        this.dislikes = dislikes;
+    }
+    
+    
         
 }

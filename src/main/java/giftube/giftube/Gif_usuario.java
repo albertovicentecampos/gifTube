@@ -22,7 +22,7 @@ public class Gif_usuario {
 
     @Id
     @Size(min = 6, max = 13)
-    private String usuario_gif;
+    private String usuario_g;
 
     @Size(min = 2, max = 20, message = "La longitud del titulo ${ValidatedValue} debe estar entre {min} y {max} caracteres")
     private String titulo_gif; ///< TITULO de cada gif
@@ -33,14 +33,14 @@ public class Gif_usuario {
 
     public Gif_usuario() {
         this.id_gif = 0;
-        this.usuario_gif = "";
+        this.usuario_g = "";
         this.titulo_gif = "";
         this.ubicacion_gif = "";
     }
 
     public Gif_usuario(int id_gif, String usuario_gif, String titulo_gif, Gif.Tags tag_gif, String ubicacion_gif) {
         this.id_gif = id_gif;
-        this.usuario_gif = usuario_gif;
+        this.usuario_g = usuario_gif;
         this.titulo_gif = titulo_gif;
         this.tag_gif = tag_gif;
         this.ubicacion_gif = ubicacion_gif;
@@ -54,12 +54,12 @@ public class Gif_usuario {
         this.id_gif = id_gif;
     }
 
-    public String getUsuario_gif() {
-        return usuario_gif;
+    public String getUsuario_g() {
+        return usuario_g;
     }
 
-    public void setUsuario_gif(String usuario_gif) {
-        this.usuario_gif = usuario_gif;
+    public void setUsuario_g(String usuario_g) {
+        this.usuario_g = usuario_g;
     }
 
     public String getTitulo_gif() {

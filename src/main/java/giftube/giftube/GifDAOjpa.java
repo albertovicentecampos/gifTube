@@ -40,6 +40,7 @@ public class GifDAOjpa implements Serializable {
     private Gif gif;
 
     public GifDAOjpa() {
+
         gifUsuario = new Gif_usuario();
         gif = new Gif();
     }
@@ -89,13 +90,11 @@ public class GifDAOjpa implements Serializable {
         return borrado;
     }
 
-    public List<Gif> buscaTodos(String usuario) {
+    public List<Gif> gifBuscaUsuario(String usuario) {
         List<Gif> lg = null;
-        String usuarioSQL = "Select g from Gif g where g.usuario_gif=:usuario";
+        String usuarioJSQL = "Select g from Gif g where g.usuario_gif=:us";
         try {
-//            TypedQuery<Gif> g = em.createQuery(usuarioSQL, Gif.class)
-//                    .setParameter("usuario", request.getParameter("usuario"));
-//            lg = g.getResultList();
+            lg = em.createQuery(usuarioJSQL, Gif.class).setParameter("us", usuario).getResultList();
         } catch (Exception ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
@@ -103,12 +102,19 @@ public class GifDAOjpa implements Serializable {
     }
 
     public void modificarTitulo(Gif _gif, String _titulo) {
-        String gifSQL = "update Gif g set g.titulo_gif=:titulo " + "where g.id_gif=_gif.id_gif";
+//        String gifSQL = "update Gif g set g.titulo_gif=:tit where g.id_gif=:iden";
+//        try {
+//            int updateCount =  em.createQuery(gifSQL).setParameter("tit", _titulo).setParameter("iden", _gif.getId_gif()).executeUpdate();
+//        } catch (Exception ex) {
+//            logger.log(Level.SEVERE, ex.getMessage(), ex);
+//        }
+
         try {
-            Query q = em.createQuery(gifSQL);
-            int updateCount = q.setParameter("titulo", _titulo).executeUpdate();
+            Gif g = _gif;
+            g.setTitulo_gif(_titulo);
+            _gif = em.merge(g);
         } catch (Exception ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            logger.log(Level.SEVERE, ex.getMessage());
         }
 
 //        try {

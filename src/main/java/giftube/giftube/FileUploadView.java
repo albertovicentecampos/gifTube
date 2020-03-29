@@ -146,7 +146,7 @@ public class FileUploadView implements Serializable {
     }
     
     public List<Gif> devuelveTodos() {
-        lista_gifs = gifDAO.buscaTodos(usuario);
+        lista_gifs = gifDAO.gifBuscaUsuario(usuario);
         return lista_gifs;
     }
 
@@ -165,7 +165,7 @@ public class FileUploadView implements Serializable {
 
     public void recupera() {
         
-        lista_gifs = gifDAO.buscaTodos(usuario);
+        lista_gifs = gifDAO.gifBuscaUsuario(usuario);
         gif = gifDAO.buscarGif(gif);
         
         titulo = gif.getTitulo_gif();
