@@ -33,26 +33,26 @@ public class FileUploadView implements Serializable {
 
     @Inject
     GifDAOjpa gifDAO;
-    
-    @Inject 
+
+    @Inject
     private Preferencias prefer;
 
     private Gif gif;
     private UploadedFile file;
     private boolean archivoReady;
     private String usuario;
-    
+
     private String titulo;
     private Tags tag;
     private String ubicacion;
     private int id;
-    
+
     private List<Gif> lista_gifs;
-    
+
     private static final Logger logger = Logger.getLogger(FileUploadView.class.getName());
 
     public FileUploadView() {
-        lista_gifs=new ArrayList<>();
+        lista_gifs = new ArrayList<>();
         this.archivoReady = false;
         usuario = "error";
     }
@@ -61,7 +61,7 @@ public class FileUploadView implements Serializable {
     public void init() {
         gif = new Gif();
         //setUsuario(prefer.getActualUsuarioid());
-        usuario=prefer.getActualUsuarioid();
+        usuario = prefer.getActualUsuarioid();
         lista_gifs = gifDAO.todos();
 //        lista_gifs=new ArrayList<>();
 //        this.archivoReady = false;
@@ -93,14 +93,13 @@ public class FileUploadView implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, message);
 
             System.out.println("Uploaded file now: " + file.getFileName());
-            
+
             gif.setUsuario_gif(usuario);
-           
+
             String name = gif.getTitulo_gif() + ".gif";
             gif.setId_gif(0);
 
             //gif = new Gif(usuario,0,titulo,tag,name);
-            
             InputStream inputStream = file.getInputstream();
             OutputStream outputStream = null;
             String path = "C:\\Users\\Alberto\\Desktop\\GifTube.git\\src\\main\\webapp\\resources\\images\\";
@@ -110,7 +109,7 @@ public class FileUploadView implements Serializable {
 
             gif.setLikes(0);
             gif.setDislikes(0);
-            
+
             System.out.println("hola");
             outputStream = new FileOutputStream(file1);
 
@@ -130,9 +129,9 @@ public class FileUploadView implements Serializable {
             System.out.println("Titulo:" + gif.getTitulo_gif());
             System.out.println("Tag:" + gif.getTag_gif());
             System.out.println("Ubicacion: " + gif.getUbicacion_gif());
-            
+
         }
-        
+
         return "";
     }
 
@@ -144,11 +143,11 @@ public class FileUploadView implements Serializable {
         file = event.getFile();
     }
 
-    public List<Gif> prueba(){
+    public List<Gif> prueba() {
         lista_gifs = gifDAO.todos();
         return lista_gifs;
     }
-    
+
     public List<Gif> devuelveTodos() {
         lista_gifs = gifDAO.gifBuscaUsuario(usuario);
         return lista_gifs;
@@ -162,22 +161,21 @@ public class FileUploadView implements Serializable {
     }
 
     public String editar() {
-        gifDAO.modificarTitulo(prefer.getG(), gif.getTitulo_gif());
-        logger.info("Nuevo titulo: " + gif.getTitulo_gif());
-//        gifDAO.modificarTitulo(gif, gif.getTitulo_gif());
-//        gifDAO.modificarTag(gif, gif.getTag_gif());
+        gifDAO.modificarTitulo(prefer.getG().getId_gif(), prefer.getG().getTitulo_gif());
+        gifDAO.modificarTag(prefer.getG().getId_gif(), prefer.getG().getTag_gif());
+
         return "gifs_propios.xhtml?faces-redirect=true";
     }
-    
-    public void recupera() { 
+
+    public void recupera() {
         lista_gifs = gifDAO.gifBuscaUsuario(usuario);
         gif = gifDAO.buscarGif(gif);
-        
+
         titulo = gif.getTitulo_gif();
         id = gif.getId_gif();
         tag = gif.getTag_gif();
         ubicacion = gif.getUbicacion_gif();
-        
+
         if (gif == null) {
             System.out.println("El cliente indicado no existe");
         }
@@ -187,12 +185,8 @@ public class FileUploadView implements Serializable {
         return usuario;
     }
 
-
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
-    
-    
-    
 
 }

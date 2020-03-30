@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -25,10 +26,12 @@ public class Gif{
     
     public enum Tags {ARTE, CINE, AMOR, ANIMALES, CIENCIAS, DEPORTES, SIMBOLOS, RELIGION, TERROR, ANIMACION, ENTRETENIMIENTO, TRISTEZA};
     @Id
+    @NotNull
     @Min(0)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id_gif; ///< ID para identificar el gif (unico para cada gif)
     
+    @NotNull
     @Size (min=6, max=13)
     private String usuario_gif;
     
@@ -48,7 +51,6 @@ public class Gif{
         id_gif = 0; 
         titulo_gif = "";
         ubicacion_gif = "";
-        
         likes = 0;
         dislikes = 0;
     }

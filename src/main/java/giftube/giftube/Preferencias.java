@@ -33,7 +33,6 @@ public class Preferencias implements Serializable {
         return g;
     }
     
-    
     public String gifEdicion(Gif _g){
         g = _g;
         return "edita_gif?faces-redirect=true";
