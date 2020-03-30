@@ -129,10 +129,6 @@ public class ClienteDAOJPA{
         return guardado;
     }
     
-    public void modificaNombre(Cliente cliente, String nombre) {
-        
-    }
-    
     public void modificaNombre(String user, String nombre) {
         try{
             Cliente c = em.find(Cliente.class, user);
@@ -142,25 +138,40 @@ public class ClienteDAOJPA{
         }
     }
 
-    public void modificaApellidos(Cliente cliente, String apellidos) {
-        
-    }
     public void modificaApellidos(String user, String apellidos) {
-    
+        try{
+            Cliente c = em.find(Cliente.class, user);
+            c.setApellidos(apellidos);
+        }catch(Exception e){
+            logger.log(Level.SEVERE, "No se ha podido modificar los apellidos del usuario");
+        }
     }
 
-    public void modificaFechaNacimiento(Cliente cliente, Date fecha) {
-
-    }
     public void modificaFechaNacimiento(String user, Date fecha) {
-
+        try{
+            Cliente c = em.find(Cliente.class, user);
+            c.setFechaNacimiento(fecha);
+        }catch(Exception e){
+            logger.log(Level.SEVERE, "No se ha podido modificar la fecha de nacimiento del usuario");
+        }
     }
 
-    public void modificaGenero(Cliente cliente, Genero genero) {
-
-    }
     public void modificaGenero(String user, Genero genero) {
-
+        try{
+            Cliente c = em.find(Cliente.class, user);
+            c.setGenero(genero);
+        }catch(Exception e){
+            logger.log(Level.SEVERE, "No se ha podido modificar el genero del usuario");
+        }
+    }
+    
+    public void modificaBiografia(String user, String biografia){
+        try{
+            Cliente c = em.find(Cliente.class, user);
+            c.setBiografia(biografia);
+        }catch(Exception e){
+            logger.log(Level.SEVERE, "No se ha podido modificar la biografia del usuario");
+        }
     }
     
 }

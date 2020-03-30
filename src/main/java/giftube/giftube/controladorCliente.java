@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package giftube.giftube;
 
 import java.io.Serializable;
@@ -81,6 +76,7 @@ public class controladorCliente implements Serializable{
             if(clienteLogeado.getPassword() != cliente.getPassword()){
                 logger.info("Usuario " + cliente.getUsuario() + " logeado correctamente");
                 pref.setActualUsuarioid(clienteLogeado.getUsuario());
+                pref.setC(clienteLogeado);
                 return "main1?faces-redirect=true";
             }else{
                 logger.info("Contraseña incorrecta");
@@ -93,6 +89,46 @@ public class controladorCliente implements Serializable{
         logger.info("Editando nombre");
         clienteDAO.modificaNombre(pref.getActualUsuarioid(), cliente.getNombre());
         logger.info("nuevo nombre: " + cliente.getNombre());
+        //pref.setC(cliente);
+        return "configuracion?faces-redirect=true";
+    }
+
+    public String editarApellidos(){
+        logger.info("Editando apellidos");
+        clienteDAO.modificaApellidos(pref.getActualUsuarioid(), cliente.getApellidos());
+        logger.info("Nuevos apellidos: " + cliente.getApellidos());
+        //pref.setC(cliente);
+        return "configuracion?faces-redirect=true";
+    }
+    
+    public String editarGenero(){
+        logger.info("Editando genero");
+        clienteDAO.modificaGenero(pref.getActualUsuarioid(), cliente.getGenero());
+        //pref.setC(cliente);
+        return "configuracion?faces-redirect=true";
+    }
+    
+    public String editarFechaNacimiento(){
+        logger.info("Editando fecha de nacimiento");
+        clienteDAO.modificaFechaNacimiento(pref.getActualUsuarioid(), cliente.getFechaNacimiento());
+        //pref.setC(cliente);
+        return "configuracion?faces-redirect=true";
+    }
+    
+    public String editarBiografia(){
+        logger.info("Editando biografia");
+        clienteDAO.modificaBiografia(pref.getActualUsuarioid(), cliente.getBiografia());
+        //pref.setC(cliente);
+        return "configuracion?faces-redirect=true";
+    }
+    
+    public String editarTodo(){
+        editarNombre();
+        editarApellidos();
+        editarGenero();
+        editarFechaNacimiento();
+        editarBiografia();
+        pref.setC(cliente);
         return "configuracion?faces-redirect=true";
     }
 }

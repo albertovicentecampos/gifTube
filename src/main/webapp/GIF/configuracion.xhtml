@@ -17,30 +17,42 @@
             <div class="ui-g-12 ui-md-12 ui-g-nopad">
                 <ui:include src="cabecera.xhtml"/>
                 <ui:include src="menu.xhtml"/>
-                <h:form title="Edicion">
-                    <div class="ui-g">
-                        <c:if test="#{prefs.usuarioVacio()}">
-
-                        
+                <c:if test="#{prefs.usuarioVacio()}">
+                    <h:form title="Edicion">
+                        <div class="ui-g">
 
                             <div class="ui-g-12 ui-md-10" align="center">
                                 <p:message for="nombre"/>
-                                <p:outputLabel value="Nombre: #{prefs.actualUsuarioid}" id="nombre"/>
+                                <p:outputLabel value="Nombre: #{prefs.c.nombre}" id="nombre"/>
                                 <p:inputText value="#{ctrlCliente.cliente.nombre}"/>
-                                <p:commandButton value="Editar" ajax="false" validateClient="false" action="#{ctrlCliente.editarNombre()}"/><br/>
-                                <p:commandButton value="Borrar cuenta" ajax="false" validateClient="false" action="#{ctrlCliente.borra()}"/>
+                            
+                                <p:message for="apellidos"/>
+                                <p:outputLabel value="Apellidos: #{prefs.c.apellidos}" id="apellidos"/>
+                                <p:inputText type="" value="#{ctrlCliente.cliente.apellidos}"/>
+                                
 
+                                
+                                <p:message for="biografia"/>
+                                <p:outputLabel value="Biografia: #{prefs.c.biografia}" id="biografia"/>
+                                <p:inputText value="#{ctrlCliente.cliente.biografia}"/>
+                                <br/>
+                                <p:commandButton value="Editar todo" ajax="false" validateClient="false" action="#{ctrlCliente.editarTodo()}"/><br/>
+                                
+
+                                
+                                <p:commandButton value="Borrar cuenta" ajax="false" validateClient="false" action="#{ctrlCliente.borra()}"/>
                             </div>  
 
-                        </c:if>
-                        <c:if test="#{prefs.usuario()}">
-                            <p>Debes estar logueado para poder editar</p>
-                        </c:if>
-                    </div>
-                </h:form>
+                        </div>
+
+                    </h:form>
+                </c:if>
+                <c:if test="#{prefs.usuario()}">
+                    <p>Debes estar logueado para poder editar</p>
+                </c:if>
             </div>
-            <ui:include src="pie.xhtml"/>
         </div>
+        <ui:include src="pie.xhtml"/>
     </h:body>
 
 </html>
