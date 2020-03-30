@@ -96,10 +96,9 @@ public class GifDAOjpa implements Serializable {
         return lg;
     }
 
-    
     public void modificarTitulo(int id_gif, String _titulo) {
         try {
-            Gif g = em.find(Gif.class,id_gif);
+            Gif g = em.find(Gif.class, id_gif);
             g.setTitulo_gif(_titulo);
 
         } catch (Exception ex) {
@@ -109,7 +108,7 @@ public class GifDAOjpa implements Serializable {
 
     public void modificarTag(int id_gif, Tags _tag) {
         try {
-            Gif g = em.find(Gif.class,id_gif);
+            Gif g = em.find(Gif.class, id_gif);
             g.setTag_gif(_tag);
 
         } catch (Exception ex) {

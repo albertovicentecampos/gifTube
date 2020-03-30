@@ -60,11 +60,8 @@ public class FileUploadView implements Serializable {
     @PostConstruct
     public void init() {
         gif = new Gif();
-        //setUsuario(prefer.getActualUsuarioid());
         usuario = prefer.getActualUsuarioid();
         lista_gifs = gifDAO.todos();
-//        lista_gifs=new ArrayList<>();
-//        this.archivoReady = false;
     }
 
     public UploadedFile getFile() {
@@ -105,14 +102,18 @@ public class FileUploadView implements Serializable {
             String path = "C:\\Users\\Alberto\\Desktop\\GifTube.git\\src\\main\\webapp\\resources\\images\\";
 
             File file1 = new File(path + name);
+            
+            gif.setFile_gif(file1);
+            
             gif.setUbicacion_gif(name);
 
             gif.setLikes(0);
             gif.setDislikes(0);
 
             System.out.println("hola");
-            outputStream = new FileOutputStream(file1);
-
+            //outputStream = new FileOutputStream(file1);
+            outputStream = new FileOutputStream(gif.getFile_gif());    
+            
             int read = 0;
             byte[] bytes = new byte[1024];
 
@@ -154,6 +155,7 @@ public class FileUploadView implements Serializable {
     }
 
     public String borra(Gif g) {
+        g.remove();
         if (gifDAO.borrarGif(g)) {
             return "gifs_propios.xhtml?faces-redirect=true";
         }
