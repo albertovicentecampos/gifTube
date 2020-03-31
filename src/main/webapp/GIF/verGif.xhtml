@@ -29,17 +29,23 @@
 
                         <h:form>
                             <h1>#{ctrlCom.nombre}</h1> 
+
                             <h:graphicImage library="images" name="#{ctrlCom.url}" width="100%" ></h:graphicImage>  
+
                             <div class="ui-g-3 ui-md-3" align="center">
                                 <p:rating value="#{ratingView.rating1}" readonly="true"/>
                             </div>
                             <div class="ui-g-3 ui-md-3" align="center">
+                                <h:commandLink action="#{ctrlCom.votarUP()}"> 
                                 <h:graphicImage library="images" name="thumb-up.png" height="42px"  styleClass="imgvisualiza"></h:graphicImage>
-                                <p>55k</p> 
+                                </h:commandLink>
+                                <p>#{ctrlCom.actlike}</p> 
                             </div>
                             <div class="ui-g-3 ui-md-3" align="center">
+                                <h:commandLink action="#{ctrlCom.votarDOWN()}"> 
                                 <h:graphicImage library="images" name="thumb-down.png" height="42px" styleClass="imgvisualiza"></h:graphicImage>
-                                <p>77</p>
+                                </h:commandLink>
+                                <p>#{ctrlCom.actdislike}</p> 
                             </div>
                             <div class="ui-g-3 ui-md-3" align="center">
                                 <h:graphicImage library="images" name="share.png" height="42px"  styleClass="imgvisualiza"></h:graphicImage>

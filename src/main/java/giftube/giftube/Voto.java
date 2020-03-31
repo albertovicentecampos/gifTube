@@ -25,15 +25,26 @@ public class Voto {
     @Id
     private int gif_id;
 
+    private int type;
     
     public Voto() {
         this.user = "usuario";
         this.gif_id = -1;
+        this.type=0;
     }
 
-    public Voto(String user, int gif_id) {
+    public Voto(String user, int gif_id,int type) {
         this.user = user;
         this.gif_id = gif_id;
+        this.type=type;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
     
 

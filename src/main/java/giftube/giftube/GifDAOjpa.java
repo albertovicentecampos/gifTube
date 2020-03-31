@@ -126,4 +126,23 @@ public class GifDAOjpa implements Serializable {
         }
         return guardado;
     }
+    
+    public void modificarLike(int id_gif, Integer _like) {
+        try {
+            Gif g = em.find(Gif.class, id_gif);
+            g.setLikes(_like);
+
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, "No se ha podido realizar el cambio de tag para el gif");
+        }
+    }
+    public void modificarDislike(int id_gif, Integer _dislike) {
+        try {
+            Gif g = em.find(Gif.class, id_gif);
+            g.setDislikes(_dislike);
+
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, "No se ha podido realizar el cambio de tag para el gif");
+        }
+    }
 }

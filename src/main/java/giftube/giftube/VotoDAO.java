@@ -28,8 +28,14 @@ public class VotoDAO {
     
     private static final Logger logger = Logger.getLogger(comentarioDAO.class.getName());
     
+    private Voto actualV;
+    
     public void add(Voto v){
-        em.persist(v);
+        try{
+            em.persist(v);
+        }catch(Exception e) {
+            logger.log(Level.SEVERE, "No se pueden escribir el voto", e);
+        }
     }
     
     public boolean alreadyVote(String user,int gif){
@@ -45,6 +51,45 @@ public class VotoDAO {
             }
         }
         return true;
+    }
+    
+    public void like(String user,int gif){
+        Voto aux;
+        try {
+            aux=em.createQuery("select c from Voto c where c.gif_id = :gif AND c.user = :us", Voto.class).setParameter("gif", gif).setParameter("us", user).getSingleResult();
+            aux.setType(1);
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "No se pueden recuperar los votos", e);
+            votos = new ArrayList<>();
+        }
+    }
+    
+    public void dislike(String user,int gif){
+        Voto aux;
+        try {
+            aux=em.createQuery("select c from Voto c where c.gif_id = :gif AND c.user = :us", Voto.class).setParameter("gif", gif).setParameter("us", user).getSingleResult();
+            aux.setType(-1);
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "No se pueden recuperar los votos", e);
+            votos = new ArrayList<>();
+        }
+
+    }
+    
+    public Voto getVoto(String user,int gif){
+        Voto aux=new Voto();
+        try {
+             votos=em.createQuery("select c from Voto c where c.gif_id = :gif", Voto.class).setParameter("gif", gif).getResultList();
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "No se pueden recuperar los votos", e);
+            votos = new ArrayList<>();
+        }
+        for (Voto comentario1 : votos) {
+            if(comentario1.getUser().equals(user)){
+                return comentario1;
+            }
+        }
+        return aux;
     }
     
 }

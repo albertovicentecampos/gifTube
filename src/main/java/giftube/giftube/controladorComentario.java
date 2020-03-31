@@ -51,6 +51,8 @@ public class controladorComentario implements Serializable {
     private boolean already;
     private Gif ver;
     Comentario c;
+    private int actlike;
+    private int actdislike;
     
     public controladorComentario() {
         this.comentarios=new ArrayList<>();
@@ -60,6 +62,8 @@ public class controladorComentario implements Serializable {
         this.url="https://media.giphy.com/media/W79wfYWCTWidO/source.gif";
         this.user="error";
         this.voto=false;
+        this.actlike=0;
+        this.actdislike=0;
     }
     
     @PostConstruct
@@ -76,6 +80,8 @@ public class controladorComentario implements Serializable {
         nombre=ver.getTitulo_gif();
         already=comment.alreadyComent(user, gif);
         this.voto=vDAO.alreadyVote(user, gif);
+        this.actlike=ver.getLikes();
+        this.actdislike=ver.getDislikes();
     }
     
     public String getComentario() {
@@ -138,30 +144,79 @@ public class controladorComentario implements Serializable {
     public boolean isVoto() {
         return voto;
     }
-    
-    public void votarUP(){
-        if(prefer.usuarioVacio()){
-            if(voto){
-                Voto aux=new Voto(user,gif);
-                vDAO.add(aux);
-                //incrementar en 1 el voto gDAO.voto(1);
-            }else{
-                //incrementar voto en 2
-            }
-        }
-    }
-    public void votarDOWN(){
-        if(prefer.usuarioVacio()){
-            if(voto){
-                Voto aux=new Voto(user,gif);
-                vDAO.add(aux);
-                //decrementar en 1 el voto gDAO.voto(1);
-            }else{
-                //decrementar voto en 2
-            }
-        }
+
+    public int getActlike() {
+        return actlike;
     }
 
+    public void setActlike(int actlike) {
+        this.actlike = actlike;
+    }
+
+    public int getActdislike() {
+        return actdislike;
+    }
+
+    public void setActdislike(int actdislike) {
+        this.actdislike = actdislike;
+    }
+    
+    public String votarUP(){
+        Voto aux;
+        if(prefer.usuarioVacio()){
+             
+            if(voto){
+                //aux= vDAO.getVoto(user, gif);
+                aux=new Voto(user,gif,0);
+                vDAO.add(aux);
+                //incrementar en 1 el voto gDAO.voto(1);
+                gDAO.modificarLike(gif, actlike+1);
+                actlike+=1;
+                vDAO.like(user, gif);
+                voto=false;
+            }else{ 
+                aux= vDAO.getVoto(user, gif);
+                if(!voto && aux.getType()==-1){
+                //incrementar voto en 2, necesito comprobar si ya ha votado like
+                gDAO.modificarLike(gif, actlike+1);
+                actlike+=1;
+                gDAO.modificarDislike(gif, actdislike-1);
+                actdislike-=1;
+                vDAO.like(user, gif);
+                }
+            }
+        }
+        return "verGif.xhtml?zelda="+gif+"&faces-redirect=true";
+    }
+    public String votarDOWN(){
+        Voto aux;
+        if(prefer.usuarioVacio()){
+            
+            if(voto){
+                aux=new Voto(user,gif,0);
+                vDAO.add(aux);
+                //decrementar en 1 el voto gDAO.voto(1);
+                gDAO.modificarDislike(gif, actdislike+1);
+                actdislike+=1;
+                vDAO.dislike(user, gif);
+                voto=false;
+            }else {
+                aux= vDAO.getVoto(user, gif);
+                if(!voto && aux.getType()==1){
+                //incrementar voto en 2, necesito comprobar si ya ha votado like
+                gDAO.modificarLike(gif, actlike-1);
+                actlike-=1;
+                gDAO.modificarDislike(gif, actdislike+1);
+                actdislike+=1;
+                vDAO.dislike(user, gif);
+            }
+            }
+        }
+        return "verGif.xhtml?zelda="+gif+"&faces-redirect=true";
+    }
+    
+    
+    
     public void setVoto(boolean voto) {
         this.voto = voto;
     }
