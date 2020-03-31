@@ -11,6 +11,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.security.enterprise.credential.UsernamePasswordCredential;
 import javax.security.enterprise.identitystore.CredentialValidationResult;
 import static javax.security.enterprise.identitystore.CredentialValidationResult.INVALID_RESULT;
@@ -23,9 +26,14 @@ import javax.security.enterprise.identitystore.IdentityStore;
 
 @ApplicationScoped
 public class UsersIdentityStore implements IdentityStore {
-
+    @Inject 
+    private Preferencias pref;
+    
+    @PersistenceContext
+    private EntityManager em;
+       
     private Map<String, String> credenciales;
-
+    
     public UsersIdentityStore() {
         credenciales = new HashMap<>();
         credenciales.put("usuario0", "clave0");
@@ -33,10 +41,16 @@ public class UsersIdentityStore implements IdentityStore {
     }
 
     public CredentialValidationResult validate(
+            
             UsernamePasswordCredential usernamePasswordCredential) {
                 String username = usernamePasswordCredential.getCaller();
+                
                 String password = usernamePasswordCredential.getPasswordAsString();
-                String validPassword = credenciales.get(username);
+                Cliente c = em.find(Cliente.class, username);
+                pref.setC(c);
+                String validPassword = c.getPassword();
+                pref.setActualUsuarioid(username);
+                
         if (validPassword != null && validPassword.equals(password)) {
             Set<String> roles = new HashSet<>(Arrays.asList("USUARIOS"));
             return new CredentialValidationResult(username, roles);

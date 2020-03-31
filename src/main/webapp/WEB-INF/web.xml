@@ -31,6 +31,7 @@
           <url-pattern>/GIF/edita_gif.xhtml</url-pattern>
           <url-pattern>/GIF/gifs_propios.xhtml</url-pattern>
           <url-pattern>/GIF/configuracion.xhtml</url-pattern>
+          
         </web-resource-collection>
         <auth-constraint>
             <role-name>USUARIOS</role-name>
