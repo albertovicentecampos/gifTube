@@ -5,22 +5,16 @@
  */
 package giftube.giftube;
 
-import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import giftube.giftube.Gif;
 import giftube.giftube.Gif.Tags;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 /**

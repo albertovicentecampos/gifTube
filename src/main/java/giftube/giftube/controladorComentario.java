@@ -130,6 +130,7 @@ public class controladorComentario implements Serializable {
     }
 
     public void setGif(int gif) {
+        logger.info("estoy guardo "+gif);
         this.gif = gif;
     }
 
