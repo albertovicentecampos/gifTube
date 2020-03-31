@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -85,6 +86,12 @@ public class Preferencias implements Serializable {
     public String loggout(){
         ActualUsuarioid="";
         return "main1?faces-redirect=true";
+    }
+    
+     public String logout() throws ServletException {
+        request.logout();
+        request.getSession().invalidate();
+        return "/main1?faces-redirect=true";
     }
 
     public ArrayList<Gif> getBuscados() {

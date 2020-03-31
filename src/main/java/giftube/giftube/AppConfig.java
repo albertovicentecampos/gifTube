@@ -17,7 +17,7 @@ import org.glassfish.soteria.identitystores.annotation.EmbeddedIdentityStoreDefi
  * @author Jesus
  */
 @EmbeddedIdentityStoreDefinition({ //Usuarios Predefinidos
-    @Credentials(callerName = "unijaen", password = "unijaen", groups = {"ADMINISTRADORES"}),
+    @Credentials(callerName = "unijaen22", password = "unijaen22", groups = {"ADMINISTRADORES"}),
     @Credentials(callerName = "ZenXuu", password = "100mariposa", groups = {"ADMINISTRADORES"}),
     @Credentials(callerName = "usuario1", password = "usuario1", groups = {"USUARIOS"})
 })
