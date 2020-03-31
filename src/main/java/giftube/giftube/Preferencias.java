@@ -89,9 +89,13 @@ public class Preferencias implements Serializable {
     }
     
      public String logout() throws ServletException {
-        request.logout();
-        request.getSession().invalidate();
-        return "/main1?faces-redirect=true";
+        try{
+            request.logout();
+            request.getSession().invalidate();
+        }catch(Exception e){
+        
+        }
+        return "main1?faces-redirect=true";
     }
 
     public ArrayList<Gif> getBuscados() {

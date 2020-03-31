@@ -58,7 +58,7 @@ public class controladorCliente implements Serializable {
         if (clienteDAO.altaCliente(cliente)) {
             logger.info("Nombre: " + cliente.getNombre() + " Apellidos: " + cliente.getApellidos()
                     + " Usuario: " + cliente.getUsuario());
-            return "login?faces-redirect=true&usuario=" + cliente.getUsuario();
+            return "login?faces-redirect=true";
         } else {
             return "";
         }
@@ -89,7 +89,7 @@ public class controladorCliente implements Serializable {
                 logger.info("Contraseña incorrecta");
             }
         }
-        return "";
+        return "main1?faces-redirect=true";
     }
 
    

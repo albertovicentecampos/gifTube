@@ -1,17 +1,40 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:vis="http://xmlns.jcp.org/jsf/composite/main"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:outputStylesheet library="css" name="grid.css"/>
+    <h:outputStylesheet library="css" name="main.css"/>
 
-    <!--Cambia el nombre al xhtml y ya empiezas haciendo tu vista y ya te tiene que ir primefaces (Tambien el welcome file)-->
-    
-    <h:head>
-        
-    </h:head>
+    <title>Principal</title>
+    <div class="ui-g">
 
-    <h:body>
+        <div class="ui-g-12 ui-md-12 ui-g-nopad">
+            <ui:include src="cabecera.xhtml"/>
+            <ui:include src="menu.xhtml"/>
 
-    </h:body>
+            <div class="ui-g">
+
+                <div class="ui-g-6 ui-md-3">
+
+                    <c:forEach var = "l" items = "#{ctrlMain.gifs}" >
+                        <div class="ui-g-6 ui-md-3">
+                            <h:link outcome="verGif.xhtml"> 
+                                <f:param name="zelda" value="${l.id_gif}"  />
+                                <h:graphicImage library="images" name="${l.ubicacion_gif}" width="100%" ></h:graphicImage>  
+                            </h:link>
+                            <p align="center">${l.titulo_gif}</p>
+                        </div>
+                    </c:forEach>
+                </div>  
+            </div>
+        </div>
+        <ui:include src="pie.xhtml"/>
+    </div>
+
+
 </html>
