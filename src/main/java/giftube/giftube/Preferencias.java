@@ -6,6 +6,7 @@
 package giftube.giftube;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -25,19 +26,15 @@ public class Preferencias implements Serializable {
     
     private String ActualUsuarioid = "";
     private int gifcargado = 0;
-
-    private Cliente c;
     
+    private ArrayList<Gif> buscados;
+    
+    private Cliente c;
+
     private Gif g; 
 
     public Gif getG() {
         return g;
-    }
-    
-    
-    public String gifEdicion(Gif _g){
-        g = _g;
-        return "edita_gif?faces-redirect=true";
     }
 
     public Cliente getC() {
@@ -48,6 +45,12 @@ public class Preferencias implements Serializable {
         this.c = c;
     }
     
+    
+    public String gifEdicion(Gif _g){
+        g = _g;
+        return "edita_gif?faces-redirect=true";
+    }
+
     public String getActualUsuarioid() {
         return ActualUsuarioid;
     }
@@ -83,4 +86,13 @@ public class Preferencias implements Serializable {
         ActualUsuarioid="";
         return "main1?faces-redirect=true";
     }
+
+    public ArrayList<Gif> getBuscados() {
+        return buscados;
+    }
+
+    public void setBuscados(ArrayList<Gif> buscados) {
+        this.buscados = buscados;
+    }
+    
 }

@@ -13,19 +13,19 @@
         <ui:include src="cabecera.xhtml"/>
         <ui:include src="menu.xhtml"/>
     </h:head>
-    <h:body>        
-        <h:form title="Login" class="grid-container">
+    <h:body>       
+        <h:form class="grid-container" id="login" onsubmit="action='j_security_check';method='POST';" prependId="false" >
                 <p:panel class="grid-container">
                 <h1 align="center">Iniciar sesión</h1>
-                <p:message for="txtUsuario"/>
-                <p:message for="txtClave"/>
+                <p:message for="j_username"/>
+                <p:message for="j_password"/>
                 <div align="center">
                     <h:panelGrid columns="2">
-                            <p:outputLabel for="txtUsuario"  value="Usuario"/>
-                            <p:inputText id="txtUsuario"  required="true" requiredMessage="Debes completar tu usuario" value="#{ctrlCliente.cliente.usuario}"/>
-                            <p:outputLabel  for="txtClave" value="Clave"/>
+                            <p:outputLabel for="j_username"  value="Usuario"/>
+                            <p:inputText id="j_username" required="true" value="#{ctrlCliente.cliente.usuario}"/>
                             
-                            <p:password id="txtClave" required="true" value="#{ctrlCliente.cliente.password}"/>
+                            <p:outputLabel  for="j_password" value="Clave"/>
+                            <p:password id="j_password" required="true" value="#{ctrlCliente.cliente.password}"/>
                             <br />
                             <div align="center">
                                 <p:column/><p:column/>

@@ -18,8 +18,10 @@
             <ui:include src="menu.xhtml"/>
 
             <div class="ui-g">
+
                 <div class="ui-g-6 ui-md-3">
-                    <c:forEach var = "l" items = "#{ctrlMain.gifs}" >
+
+                    <c:forEach var = "l" items = "#{prefs.buscados}" >
                         <div class="ui-g-6 ui-md-3">
                             <h:link outcome="verGif.xhtml"> 
                                 <f:param name="zelda" value="${l.id_gif}"  />
@@ -36,4 +38,3 @@
 
 
 </html>
-
