@@ -64,13 +64,14 @@ public class controladorCliente implements Serializable {
         }
     }
 
-    public void borra() throws ServletException {
+    public String borra() throws ServletException {
         logger.info("Borrando cliente");
         cliente = pref.getC();
         logger.info("Usuario: " + cliente.getUsuario());
         clienteDAO.borraCliente(cliente);
         logger.info("Cliente borrado: Usuario: " + cliente.getUsuario() + " Nombre: " + cliente.getNombre());
-        pref.loggout();
+        pref.logout();
+        return "main1?faces-redirect=true";
     }
 
     public String login() {
