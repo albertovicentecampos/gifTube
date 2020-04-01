@@ -16,18 +16,42 @@
         <min-pool-size>5</min-pool-size>
     </data-source>
     
+    <security-role>
+        <role-name>USUARIOS</role-name>
+    </security-role>
+    
+    <security-role>
+        <role-name>ADMINISTRADORES</role-name>
+    </security-role>
+   
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Usuarios identificados</web-resource-name>
+          <url-pattern>/GIF/upload_gif.xhtml</url-pattern> <!--URL's en las que tienes que estar si o si logeado-->
+          <url-pattern>/GIF/edita_gif.xhtml</url-pattern>
+          <url-pattern>/GIF/gifs_propios.xhtml</url-pattern>
+          <url-pattern>/GIF/configuracion.xhtml</url-pattern>
+          <url-pattern>/GIF/main.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>USUARIOS</role-name>
+            <role-name>ADMINISTRADORES</role-name>
+        </auth-constraint>
+    </security-constraint>
+    
     <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
+        <session-timeout> 50 </session-timeout> 
+        <cookie-config>
+            <http-only>true</http-only>
+            <secure>false</secure> 
+        </cookie-config>
+        <tracking-mode>COOKIE</tracking-mode> 
     </session-config>
     
     <welcome-file-list>
         <welcome-file>GIF/main1.xhtml</welcome-file>
     </welcome-file-list>
-    
-
-  
+      
   
 </web-app>
 

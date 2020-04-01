@@ -6,6 +6,7 @@
 package giftube.giftube;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -21,31 +22,61 @@ import javax.servlet.http.HttpServletRequest;
 @Named("ctrlMain")
 @ViewScoped
 public class controllerMain implements Serializable {
+
     @Inject
     private HttpServletRequest request;
+    
     @Inject
     Preferencias preferencias;
+    
     private static final Logger logger = Logger.getLogger(controllerMain.class.getName());
+    
     @Inject
     private GifDAOjpa gifsDAO;
-    
+
     List<Gif> gifs;
 
     private Gif gif;
+
+    private String busca;
     
     public controllerMain() {
     }
-    
+
     @PostConstruct
     private void init() {
         gif = new Gif();
         gifs = gifsDAO.todos();
+        busca="";
+    }
+
+    public String getBusca() {
+        return busca;
+    }
+
+    public void setBusca(String busca) {
+        this.busca = busca;
     }
 
     public List<Gif> getGifs() {
         gif.getUbicacion_gif();
+        gif.getTitulo_gif();
         return gifs;
     }
+
+    public String Buscar() {
+        ArrayList<Gif> aux = new ArrayList<>();
+        for (int i = 0; i < gifs.size(); i++) {
+            if (gifs.get(i).getTitulo_gif().contains(busca)) {
+                aux.add(gifs.get(i));
+            }
+        }
+        preferencias.setBuscados(aux);
+        
+        return "mainBusqueda.xhtml";
+    }
+    
+
 
     public Gif getGif() {
         return gif;
@@ -54,13 +85,13 @@ public class controllerMain implements Serializable {
     public void setGif(Gif gif) {
         this.gif = gif;
     }
-    
+
     public void recupera() {
         logger.info("Buscando Gif " + gif.getTitulo_gif());
         gif = gifsDAO.buscarGif(gif);
         preferencias.setGifcargado(gif.getId_gif());
     }
-    
+
     public void recupera(Gif _gif) {
         logger.info("Buscando Gif " + gif.getTitulo_gif());
         gif = gifsDAO.buscarGif(_gif);
@@ -82,8 +113,10 @@ public class controllerMain implements Serializable {
         logger.info("Borrando Gif");
         gifsDAO.borrarGif(_gif);
     }
+
     public String buscaT(){
     
         return "main1?faces-redirect=true";
     }
+
 }

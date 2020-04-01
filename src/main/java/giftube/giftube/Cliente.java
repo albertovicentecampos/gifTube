@@ -6,6 +6,8 @@
 package giftube.giftube;
 
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
@@ -14,9 +16,11 @@ import javax.validation.constraints.Size;
  *
  * @author miguel
  */
+@Entity
 public class Cliente {
     public enum Genero{ Hombre, Mujer, Otro };
     
+    @Id
     @NotEmpty(message="Debes completar el usuario")
     @Size(min=6,max=16, message="La longitud del usuario debe ser entre 6 y 16 caracteres")
     private String usuario; ///< usuario único por cliente, nos sirve para identificar al cliente
