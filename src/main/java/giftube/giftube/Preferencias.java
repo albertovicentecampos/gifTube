@@ -5,6 +5,7 @@
  */
 package giftube.giftube;
 
+import giftube.giftube.Gif.Tags;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -26,7 +27,8 @@ public class Preferencias implements Serializable {
     private String ActualUsuarioid = "";
     private int gifcargado = 0;
 
-
+    private Tags buscaTag;
+    
     private Gif g; 
 
     public Gif getG() {
@@ -40,6 +42,14 @@ public class Preferencias implements Serializable {
 
     public String getActualUsuarioid() {
         return ActualUsuarioid;
+    }
+
+    public Tags getBuscaTag() {
+        return buscaTag;
+    }
+
+    public void setBuscaTag(Tags buscaTag) {
+        this.buscaTag = buscaTag;
     }
 
     public void setActualUsuarioid(String ActualUsuarioid) {

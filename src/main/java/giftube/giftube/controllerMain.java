@@ -82,5 +82,8 @@ public class controllerMain implements Serializable {
         logger.info("Borrando Gif");
         gifsDAO.borrarGif(_gif);
     }
+    public String buscaT(){
     
+        return "main1?faces-redirect=true";
+    }
 }
