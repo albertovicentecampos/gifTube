@@ -53,6 +53,7 @@ public class controladorComentario implements Serializable {
     Comentario c;
     private int actlike;
     private int actdislike;
+    private String zelda;
     
     public controladorComentario() {
         this.comentarios=new ArrayList<>();
@@ -69,11 +70,13 @@ public class controladorComentario implements Serializable {
     @PostConstruct
     private void init() {
         user=prefer.getActualUsuarioid();
+
     }
 
     public void recupera(){
         logger.info("carga url");
         url="https://media.giphy.com/media/W79wfYWCTWidO/source.gif";
+        gif=Integer.parseInt(zelda);
         comentarios=comment.buscaTodos(gif);
         ver=gDAO.buscarGif(gif);
         url=ver.getUbicacion_gif();
@@ -88,6 +91,14 @@ public class controladorComentario implements Serializable {
         return comentario;
     }
 
+    public String getZelda() {
+        return zelda;
+    }
+
+    public void setZelda(String zelda) {
+        this.zelda = zelda;
+    }
+    
     public void setComentario(String comentario) {
         this.comentario = comentario;
     }
@@ -130,8 +141,10 @@ public class controladorComentario implements Serializable {
     }
 
     public void setGif(int gif) {
-        logger.info("estoy guardo "+gif);
-        this.gif = gif;
+        //logger.info("estoy guardo "+gif);
+
+        //this.gif = gif;
+        this.gif=1;
     }
 
     public boolean isAlready() {
