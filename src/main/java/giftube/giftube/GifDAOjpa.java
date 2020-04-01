@@ -5,7 +5,6 @@
  */
 package giftube.giftube;
 
-import giftube.giftube.Gif;
 import giftube.giftube.Gif.Tags;
 import java.io.Serializable;
 import java.util.List;

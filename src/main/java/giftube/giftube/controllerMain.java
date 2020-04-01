@@ -115,8 +115,14 @@ public class controllerMain implements Serializable {
     }
 
     public String buscaT(){
-    
-        return "main1?faces-redirect=true";
+        ArrayList<Gif> buscados= new ArrayList<>();
+        gifs = gifsDAO.todos();
+        for (Gif gif1 : gifs) {
+            if(gif1.getTag_gif()==preferencias.getBuscaTag())
+                buscados.add(gif1);
+        }
+        preferencias.setBuscados(buscados);
+        return "mainBusqueda?faces-redirect=true";
     }
 
 }
