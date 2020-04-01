@@ -142,6 +142,10 @@ public class controladorComentario implements Serializable {
         this.already = already;
     }
 
+    public boolean puedoBorrar(){
+        return !already && prefer.usuarioVacio();
+    }
+                    
     public boolean isVoto() {
         return voto;
     }
@@ -221,5 +225,9 @@ public class controladorComentario implements Serializable {
     public void setVoto(boolean voto) {
         this.voto = voto;
     }
-    
+    public String borra(){
+        
+        comment.borra(user,gif);
+        return "verGif.xhtml?zelda="+gif+"&faces-redirect=true";
+    }
 }

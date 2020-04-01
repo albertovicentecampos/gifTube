@@ -72,4 +72,18 @@ public class comentarioDAO {
         return true;
     }
     
+    public void borra(String user,int gif){
+        try {
+             comentarios=em.createQuery("select c from Comentario c where c.gif_id = :gif", Comentario.class).setParameter("gif", gif).getResultList();
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "No se pueden recuperar los comentarios", e);
+            comentarios = new ArrayList<>();
+        }
+        for (Comentario comentario1 : comentarios) {
+            if(comentario1.getUser().equals(user)){
+                em.remove(comentario1);
+            }
+        }
+    }
+    
 }

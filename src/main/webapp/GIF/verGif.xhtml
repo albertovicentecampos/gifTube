@@ -72,6 +72,11 @@
                             <p:commandButton value="Comentar" ajax="false" validateClient="false" action="#{ctrlCom.crea()}"/>
                         </h:form>
                         </c:if>
+                        <c:if test="#{ctrlCom.puedoBorrar()}">
+                        <h:form>
+                            <p:commandButton value="Borra comentario" ajax="false" validateClient="false" action="#{ctrlCom.borra()}"/>
+                        </h:form>
+                        </c:if>
                     </div> 
 
                 </div>
