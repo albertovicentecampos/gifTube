@@ -64,15 +64,13 @@ public class controladorCliente implements Serializable {
         }
     }
 
-    public void borra() {
+    public void borra() throws ServletException {
         logger.info("Borrando cliente");
-        if (clienteDAO.buscaCliente(pref.getActualUsuarioid()) == null) {
-            logger.info("No se puede borrar la cuenta porque el usuario no existe.");
-        } else {
-            cliente = clienteDAO.buscaCliente(pref.getActualUsuarioid());
-            clienteDAO.borraCliente(pref.getActualUsuarioid());
-            logger.info("Cliente borrado: Usuario: " + cliente.getUsuario() + " Nombre: " + cliente.getNombre());
-        }
+        cliente = pref.getC();
+        logger.info("Usuario: " + cliente.getUsuario());
+        clienteDAO.borraCliente(cliente);
+        logger.info("Cliente borrado: Usuario: " + cliente.getUsuario() + " Nombre: " + cliente.getNombre());
+        pref.loggout();
     }
 
     public String login() {
@@ -98,7 +96,6 @@ public class controladorCliente implements Serializable {
         logger.info("Editando nombre");
         clienteDAO.modificaNombre(pref.getActualUsuarioid(), cliente.getNombre());
         logger.info("nuevo nombre: " + cliente.getNombre());
-        //pref.setC(cliente);
         return "configuracion?faces-redirect=true";
     }
 
@@ -106,28 +103,24 @@ public class controladorCliente implements Serializable {
         logger.info("Editando apellidos");
         clienteDAO.modificaApellidos(pref.getActualUsuarioid(), cliente.getApellidos());
         logger.info("Nuevos apellidos: " + cliente.getApellidos());
-        //pref.setC(cliente);
         return "configuracion?faces-redirect=true";
     }
 
     public String editarGenero() {
         logger.info("Editando genero");
         clienteDAO.modificaGenero(pref.getActualUsuarioid(), cliente.getGenero());
-        //pref.setC(cliente);
         return "configuracion?faces-redirect=true";
     }
 
     public String editarFechaNacimiento() {
         logger.info("Editando fecha de nacimiento");
         clienteDAO.modificaFechaNacimiento(pref.getActualUsuarioid(), cliente.getFechaNacimiento());
-        //pref.setC(cliente);
         return "configuracion?faces-redirect=true";
     }
 
     public String editarBiografia() {
         logger.info("Editando biografia");
         clienteDAO.modificaBiografia(pref.getActualUsuarioid(), cliente.getBiografia());
-        //pref.setC(cliente);
         return "configuracion?faces-redirect=true";
     }
 

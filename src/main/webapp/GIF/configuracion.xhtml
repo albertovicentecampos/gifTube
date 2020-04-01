@@ -30,21 +30,21 @@
                                 <p:outputLabel value="Apellidos: #{prefs.c.apellidos}" id="apellidos"/>
                                 <p:inputText type="" value="#{ctrlCliente.cliente.apellidos}"/>
                                 
-
-                                
                                 <p:message for="biografia"/>
                                 <p:outputLabel value="Biografia: #{prefs.c.biografia}" id="biografia"/>
                                 <p:inputText value="#{ctrlCliente.cliente.biografia}"/>
                                 <br/>
                                 <p:commandButton value="Editar todo" ajax="false" validateClient="false" action="#{ctrlCliente.editarTodo()}"/><br/>
-                                
-
-                                
-                                <p:commandButton value="Borrar cuenta" ajax="false" validateClient="false" action="#{ctrlCliente.borra()}"/>
                             </div>  
-
                         </div>
-
+                    </h:form>
+                    <h:form title="BorrarCuenta">
+                        <div class="ui-g">
+                            <div class="ui-g-12 ui-md-10" align="center">
+                                <p:message for="botonBorrar" />
+                                <p:commandButton id="botonBorrar" value="Borrar cuenta" ajax="false" validateClient="false" action="#{ctrlCliente.borra()}"/>
+                            </div>
+                        </div>
                     </h:form>
                 </c:if>
                 <c:if test="#{prefs.usuario()}">
