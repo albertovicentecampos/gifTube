@@ -25,10 +25,13 @@ import javax.validation.constraints.Size;
 public class controladorComentario implements Serializable {
     
     @Inject
-    private comentarioDAOMap comment;
+    private comentarioDAO comment;
     
     @Inject
     private GifDAOjpa gDAO;
+    
+    @Inject
+    private VotoDAO vDAO;
     
     @Inject
     private Preferencias prefer;
@@ -40,6 +43,7 @@ public class controladorComentario implements Serializable {
     @Size(min=3,message = "La longitud del comentario debe  ser mayor 2 caracteres")
     private String comentario;
     
+    private boolean voto;
     private String nombre;
     private String url;
     private String user;
@@ -47,6 +51,9 @@ public class controladorComentario implements Serializable {
     private boolean already;
     private Gif ver;
     Comentario c;
+    private int actlike;
+    private int actdislike;
+    private String zelda;
     
     public controladorComentario() {
         this.comentarios=new ArrayList<>();
@@ -55,27 +62,43 @@ public class controladorComentario implements Serializable {
         this.nombre="prueba";
         this.url="https://media.giphy.com/media/W79wfYWCTWidO/source.gif";
         this.user="error";
+        this.voto=false;
+        this.actlike=0;
+        this.actdislike=0;
     }
     
     @PostConstruct
     private void init() {
         user=prefer.getActualUsuarioid();
+
     }
 
     public void recupera(){
         logger.info("carga url");
         url="https://media.giphy.com/media/W79wfYWCTWidO/source.gif";
+        gif=Integer.parseInt(zelda);
         comentarios=comment.buscaTodos(gif);
         ver=gDAO.buscarGif(gif);
         url=ver.getUbicacion_gif();
         nombre=ver.getTitulo_gif();
         already=comment.alreadyComent(user, gif);
+        this.voto=vDAO.alreadyVote(user, gif);
+        this.actlike=ver.getLikes();
+        this.actdislike=ver.getDislikes();
     }
     
     public String getComentario() {
         return comentario;
     }
 
+    public String getZelda() {
+        return zelda;
+    }
+
+    public void setZelda(String zelda) {
+        this.zelda = zelda;
+    }
+    
     public void setComentario(String comentario) {
         this.comentario = comentario;
     }
@@ -90,7 +113,7 @@ public class controladorComentario implements Serializable {
     
     public String crea(){
         logger.info(comentario);
-        c=new Comentario(user,gif,comentario, 0);
+        c=new Comentario(user,gif,comentario);
         comment.add(c);
         return "verGif?zelda="+gif+"&faces-redirect=true";
     
@@ -118,7 +141,10 @@ public class controladorComentario implements Serializable {
     }
 
     public void setGif(int gif) {
-        this.gif = gif;
+        //logger.info("estoy guardo "+gif);
+
+        //this.gif = gif;
+        this.gif=1;
     }
 
     public boolean isAlready() {
@@ -128,5 +154,93 @@ public class controladorComentario implements Serializable {
     public void setAlready(boolean already) {
         this.already = already;
     }
+
+    public boolean puedoBorrar(){
+        return !already && prefer.usuarioVacio();
+    }
+                    
+    public boolean isVoto() {
+        return voto;
+    }
+
+    public int getActlike() {
+        return actlike;
+    }
+
+    public void setActlike(int actlike) {
+        this.actlike = actlike;
+    }
+
+    public int getActdislike() {
+        return actdislike;
+    }
+
+    public void setActdislike(int actdislike) {
+        this.actdislike = actdislike;
+    }
     
+    public String votarUP(){
+        Voto aux;
+        if(prefer.usuarioVacio()){
+             
+            if(voto){
+                //aux= vDAO.getVoto(user, gif);
+                aux=new Voto(user,gif,0);
+                vDAO.add(aux);
+                //incrementar en 1 el voto gDAO.voto(1);
+                gDAO.modificarLike(gif, actlike+1);
+                actlike+=1;
+                vDAO.like(user, gif);
+                voto=false;
+            }else{ 
+                aux= vDAO.getVoto(user, gif);
+                if(!voto && aux.getType()==-1){
+                //incrementar voto en 2, necesito comprobar si ya ha votado like
+                gDAO.modificarLike(gif, actlike+1);
+                actlike+=1;
+                gDAO.modificarDislike(gif, actdislike-1);
+                actdislike-=1;
+                vDAO.like(user, gif);
+                }
+            }
+        }
+        return "verGif.xhtml?zelda="+gif+"&faces-redirect=true";
+    }
+    public String votarDOWN(){
+        Voto aux;
+        if(prefer.usuarioVacio()){
+            
+            if(voto){
+                aux=new Voto(user,gif,0);
+                vDAO.add(aux);
+                //decrementar en 1 el voto gDAO.voto(1);
+                gDAO.modificarDislike(gif, actdislike+1);
+                actdislike+=1;
+                vDAO.dislike(user, gif);
+                voto=false;
+            }else {
+                aux= vDAO.getVoto(user, gif);
+                if(!voto && aux.getType()==1){
+                //incrementar voto en 2, necesito comprobar si ya ha votado like
+                gDAO.modificarLike(gif, actlike-1);
+                actlike-=1;
+                gDAO.modificarDislike(gif, actdislike+1);
+                actdislike+=1;
+                vDAO.dislike(user, gif);
+            }
+            }
+        }
+        return "verGif.xhtml?zelda="+gif+"&faces-redirect=true";
+    }
+    
+    
+    
+    public void setVoto(boolean voto) {
+        this.voto = voto;
+    }
+    public String borra(){
+        
+        comment.borra(user,gif);
+        return "verGif.xhtml?zelda="+gif+"&faces-redirect=true";
+    }
 }

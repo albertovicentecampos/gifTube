@@ -33,27 +33,26 @@ public class FileUploadView implements Serializable {
 
     @Inject
     GifDAOjpa gifDAO;
-    
-    @Inject 
+
+    @Inject
     private Preferencias prefer;
 
     private Gif gif;
     private UploadedFile file;
     private boolean archivoReady;
     private String usuario;
-    
+
     private String titulo;
     private Tags tag;
     private String ubicacion;
     private int id;
-    
+
     private List<Gif> lista_gifs;
-    
 
     private static final Logger logger = Logger.getLogger(FileUploadView.class.getName());
 
     public FileUploadView() {
-        lista_gifs=new ArrayList<>();
+        lista_gifs = new ArrayList<>();
         this.archivoReady = false;
         usuario = "error";
     }
@@ -61,8 +60,8 @@ public class FileUploadView implements Serializable {
     @PostConstruct
     public void init() {
         gif = new Gif();
-        //setUsuario(prefer.getActualUsuarioid());
-        usuario=prefer.getActualUsuarioid();
+        usuario = prefer.getActualUsuarioid();
+        lista_gifs = gifDAO.todos();
     }
 
     public UploadedFile getFile() {
@@ -91,24 +90,30 @@ public class FileUploadView implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, message);
 
             System.out.println("Uploaded file now: " + file.getFileName());
-            
+
             gif.setUsuario_gif(usuario);
-           
+
             String name = gif.getTitulo_gif() + ".gif";
             gif.setId_gif(0);
 
             //gif = new Gif(usuario,0,titulo,tag,name);
-            
             InputStream inputStream = file.getInputstream();
             OutputStream outputStream = null;
-            String path = "C:\\Users\\Alberto\\Desktop\\GifTube.git\\src\\main\\webapp\\resources\\images\\";
+            String path = "D:\\David\\Documentos de texto textuales\\NetBeansProjects\\GifTube\\src\\main\\webapp\\resources\\images\\";
 
             File file1 = new File(path + name);
+            
+            gif.setFile_gif(file1);
+            
             gif.setUbicacion_gif(name);
 
-            System.out.println("hola");
-            outputStream = new FileOutputStream(file1);
+            gif.setLikes(0);
+            gif.setDislikes(0);
 
+            System.out.println("hola");
+            //outputStream = new FileOutputStream(file1);
+            outputStream = new FileOutputStream(gif.getFile_gif());    
+            
             int read = 0;
             byte[] bytes = new byte[1024];
 
@@ -116,8 +121,6 @@ public class FileUploadView implements Serializable {
                 outputStream.write(bytes, 0, read);
             }
 
-            
-            
             if (gifDAO.subirGif(gif)) {
                 System.out.println("Done!");
                 return "gifs_propios.xhtml?faces-redirect=true";
@@ -127,9 +130,9 @@ public class FileUploadView implements Serializable {
             System.out.println("Titulo:" + gif.getTitulo_gif());
             System.out.println("Tag:" + gif.getTag_gif());
             System.out.println("Ubicacion: " + gif.getUbicacion_gif());
-            
+
         }
-        
+
         return "";
     }
 
@@ -141,12 +144,18 @@ public class FileUploadView implements Serializable {
         file = event.getFile();
     }
 
+    public List<Gif> prueba() {
+        lista_gifs = gifDAO.todos();
+        return lista_gifs;
+    }
+
     public List<Gif> devuelveTodos() {
-        lista_gifs = gifDAO.buscaTodos(usuario);
+        lista_gifs = gifDAO.gifBuscaUsuario(usuario);
         return lista_gifs;
     }
 
     public String borra(Gif g) {
+        g.remove();
         if (gifDAO.borrarGif(g)) {
             return "gifs_propios.xhtml?faces-redirect=true";
         }
@@ -154,21 +163,21 @@ public class FileUploadView implements Serializable {
     }
 
     public String editar() {
-        gifDAO.modificarTitulo(gif, gif.getTitulo_gif());
-        gifDAO.modificarTag(gif, gif.getTag_gif());
+        gifDAO.modificarTitulo(prefer.getG().getId_gif(), prefer.getG().getTitulo_gif());
+        gifDAO.modificarTag(prefer.getG().getId_gif(), prefer.getG().getTag_gif());
+
         return "gifs_propios.xhtml?faces-redirect=true";
     }
 
     public void recupera() {
-        
-        lista_gifs = gifDAO.buscaTodos(usuario);
+        lista_gifs = gifDAO.gifBuscaUsuario(usuario);
         gif = gifDAO.buscarGif(gif);
-        
+
         titulo = gif.getTitulo_gif();
         id = gif.getId_gif();
         tag = gif.getTag_gif();
         ubicacion = gif.getUbicacion_gif();
-        
+
         if (gif == null) {
             System.out.println("El cliente indicado no existe");
         }
@@ -178,12 +187,8 @@ public class FileUploadView implements Serializable {
         return usuario;
     }
 
-
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
-    
-    
-    
 
 }
