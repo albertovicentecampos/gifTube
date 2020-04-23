@@ -71,10 +71,12 @@ public class controladorCliente implements Serializable {
         clienteDAO.borraCliente(cliente);
         logger.info("Cliente borrado: Usuario: " + cliente.getUsuario() + " Nombre: " + cliente.getNombre());
         pref.logout();
+        pref.loggout();
         return "main1?faces-redirect=true";
     }
 
-    public String login() {
+    public String login() throws ServletException {
+        try{
         Cliente clienteLogeado = clienteDAO.buscaCliente(cliente);
         if (clienteLogeado == null) {
             logger.info("No existe ningun cliente con el usuario: " + cliente.getUsuario());
@@ -87,7 +89,9 @@ public class controladorCliente implements Serializable {
             } else {
                 logger.info("Contraseña incorrecta");
             }
-        }
+        }}
+        catch(Exception e){ pref.logout();
+        pref.loggout();}
         return "main1?faces-redirect=true";
     }
 
