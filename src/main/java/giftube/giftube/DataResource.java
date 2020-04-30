@@ -23,12 +23,19 @@ public class DataResource {
     private static final Logger logger = Logger.getLogger(DataResource.class.getName());
     
     @Inject
+    comentarioDAO comentDAO;
+    
+    @Inject
     GifDAOjpa gifDAO;
     
     @GET
     public List<Gif> listado() {
         logger.info("pedido rest");
-        return gifDAO.todos();
+        List<Gif> data=gifDAO.todos();
+        for (Gif gif1 : data) {
+           gif1.setFile_gif(null);
+        }
+        return data;
     }
     
 }
