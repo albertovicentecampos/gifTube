@@ -38,6 +38,8 @@ function validarFormulario(event) {
                 .textContent = "Clave no válida (Debe contener al menos 8 caracteres, debe contener al menos 1 letra mayuscula y 1 digito, puede contener caracteres especiales) ";
         valido = false;
     }
+
+
     if (contra1 !== contra2) {
         el('#errConfirma')
                 .textContent = "La clave no coincide con la primera";
@@ -51,4 +53,3 @@ function validarFormulario(event) {
 
 
 
-//if (usuario.search(/^\d{7,8}(-?[a-z])?$/i) === -1)
