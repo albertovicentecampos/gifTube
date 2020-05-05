@@ -17,17 +17,11 @@
     </h:head>
     <h:body class="grid-container">
         <div align="center">
-            <h:form title="signup" id="fcliente" onsubmit="validarFormulario(event)">
+            <h:form title="signup" id="fcliente" onsubmit="validarFormulario(event)" onreset="true">
                 <p:panel>
                     <h1>Registrarse</h1>
-
                     <p>Añade tus datos para registrarte</p>
-
-                 <!--   <p:message for="txtNombre"/>
-                    <p:message for="txtApellidos"/>
-                    <p:message for="txtUsuario"/>
-                    <p:message for="txtClave"/>
-                    <p:message for="txtConfirma"/> -->
+                    
                     <h:panelGrid columns="2"> 
                         <p:outputLabel for="txtNombre" value="Nombre"/>
                         <p:inputText id="txtNombre" required="true" value="#{ctrlCliente.cliente.nombre}" label="Error"></p:inputText>
@@ -49,28 +43,29 @@
                        
                         <p:outputLabel  for="txtConfirma" value="Confirmar clave"/>
                         <p:password id="txtConfirma" required="true"/>
-                        
-                        
-                        
+                                                
                         <br />
                         
                         <h:column/><h:column/>
                         <p:commandButton  value="Registrarse" ajax="false" validateClient="true" action="#{ctrlCliente.crea()}"/>
                         <br/>
                         <br/>
-
+                        <p:message for="txtNombre"/>
+                        <p:message for="txtApellidos"/>
+                        <p:message for="txtUsuario"/>
+                        <p:message for="txtClave"/>
+                        <p:message for="txtConfirma"/>
+                        
                         <h:column/>
-
                     </h:panelGrid>
-                 
-                 <p style="color: red" id="errNombre"></p>
-                 <p style="color: red" id="errApellidos"></p>
-                 <p style="color: red" id="errUsuario"></p>
-                 <p style="color: red" id="errClave"></p>
-                 <p style="color: red" id="errConfirma"></p>        
-
+                        <p style="color: red" id="errNombre"></p>
+                        <p style="color: red" id="errApellidos"></p>
+                        <p style="color: red" id="errUsuario"></p>
+                        <p style="color: red" id="errClave"></p>
+                        <p style="color: red" id="errConfirma"></p> 
                 </p:panel>                
             </h:form>
+            
         </div>
     </h:body>
 

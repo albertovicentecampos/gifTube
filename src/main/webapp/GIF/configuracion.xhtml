@@ -22,14 +22,11 @@
                         <div class="ui-g">
 
                             <div class="ui-g-12 ui-md-10" align="center">
-                                
                                 <p:outputLabel value="Nombre: #{prefs.c.nombre}" id="nombre"/>
                                 <p:inputText value="#{ctrlCliente.cliente.nombre}"/>
-                                <p:message for="nombre"/>
-                                
+                                                                
                                 <p:outputLabel value="Apellidos: #{prefs.c.apellidos}" id="apellidos"/>
                                 <p:inputText type="" value="#{ctrlCliente.cliente.apellidos}"/>
-                                <p:message for="apellidos"/>
                                 
                                 <p:outputLabel value="Biografia: #{prefs.c.biografia}" id="biografia"/>
                                 <p:inputText value="#{ctrlCliente.cliente.biografia}"/>
@@ -39,7 +36,8 @@
                             </div>  
                         </div>
                     </h:form>
-                    
+                    <p:message for="nombre"/>
+                    <p:message for="apellidos"/>
                     <h:form title="BorrarCuenta">
                         <div class="ui-g">
                             <div class="ui-g-12 ui-md-10" align="center">
