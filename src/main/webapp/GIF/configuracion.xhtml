@@ -19,33 +19,45 @@
                 <ui:include src="menu.xhtml"/>
                 <c:if test="#{prefs.usuarioVacio()}">
                     <h:form title="Edicion">
+
                         <div class="ui-g">
 
                             <div class="ui-g-12 ui-md-10" align="center">
-                                <p:message for="nombre"/>
-                                <p:outputLabel value="Nombre: #{prefs.c.nombre}" id="nombre"/>
-                                <p:inputText value="#{ctrlCliente.cliente.nombre}"/>
-                            
-                                <p:message for="apellidos"/>
-                                <p:outputLabel value="Apellidos: #{prefs.c.apellidos}" id="apellidos"/>
-                                <p:inputText type="" value="#{ctrlCliente.cliente.apellidos}"/>
-                                
-                                <p:message for="biografia"/>
-                                <p:outputLabel value="Biografia: #{prefs.c.biografia}" id="biografia"/>
-                                <p:inputText value="#{ctrlCliente.cliente.biografia}"/>
+                                <h:panelGrid>
+                                    <p:outputLabel style="align-content: flex-end" value="Nombre: " id="nombre">#{prefs.c.nombre}</p:outputLabel>
+                                    <p:inputText id="txtNom" value="#{ctrlCliente.cliente.nombre}"/>
+
+                                    <p:outputLabel value="Apellidos: #{prefs.c.apellidos}" id="apellidos"/>
+                                    <p:inputText id="txtApe" value="#{ctrlCliente.cliente.apellidos}"/>
+
+                                    <p:outputLabel value="Biografia: #{prefs.c.biografia}" id="biografia"/>
+                                    <p:inputText id="txtBio" value="#{ctrlCliente.cliente.biografia}"/>
+                                </h:panelGrid>
+
                                 <br/>
                                 <p:commandButton value="Editar todo" ajax="false" validateClient="false" action="#{ctrlCliente.editarTodo()}"/><br/>
+                                <h:form title="BorrarCuenta">
+                                    <div class="ui-g">
+                                        <div class="ui-g-12 ui-md-1">
+                                        </div>
+                                        <div class="ui-g-12 ui-md-10" align="center">
+                                            <p:message for="botonBorrar" />
+                                            <p:commandButton id="botonBorrar" value="Borrar cuenta" ajax="false" validateClient="false" action="#{ctrlCliente.borra()}"/>
+                                        </div>
+                                    </div>
+                                </h:form>
+                                <p:message for="txtNom"/>
+                            <p:message for="txtApe"/>
+                            <p:message for="txtBio"/>
                             </div>  
+                            
+
                         </div>
+
                     </h:form>
-                    <h:form title="BorrarCuenta">
-                        <div class="ui-g">
-                            <div class="ui-g-12 ui-md-10" align="center">
-                                <p:message for="botonBorrar" />
-                                <p:commandButton id="botonBorrar" value="Borrar cuenta" ajax="false" validateClient="false" action="#{ctrlCliente.borra()}"/>
-                            </div>
-                        </div>
-                    </h:form>
+
+
+
                 </c:if>
                 <c:if test="#{prefs.usuario()}">
                     <p>Debes estar logueado para poder editar</p>

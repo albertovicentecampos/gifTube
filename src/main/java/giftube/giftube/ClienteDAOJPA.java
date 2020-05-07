@@ -71,12 +71,17 @@ public class ClienteDAOJPA{
      */
     public boolean altaCliente(Cliente cliente){
         boolean creado = false;
+        Cliente c;
         try{
-            em.persist(cliente);
-            creado = true;
+            c=em.find(Cliente.class, cliente.getUsuario());
+            if(c==null){
+                em.persist(cliente);
+                creado = true;
+            }
         }catch (Exception e){
             logger.log(Level.SEVERE, "No se ha podido añadir el cliente a la base de datos", e);
         }
+        
         return creado;
     }
 

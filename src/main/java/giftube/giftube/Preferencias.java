@@ -26,13 +26,14 @@ public class Preferencias implements Serializable {
     @Inject
     private HttpServletRequest request; //Lo pongo por si acaso.
     
-    public Preferencias() {};
+    public Preferencias() {duplicado=false;};
     
     private String ActualUsuarioid = "";
     private int gifcargado = 0;
 
     private Tags buscaTag;
 
+    private boolean duplicado;
     
     private ArrayList<Gif> buscados;
     
@@ -73,6 +74,7 @@ public class Preferencias implements Serializable {
     }
 
     public void setActualUsuarioid(String ActualUsuarioid) {
+        duplicado=false;
         this.ActualUsuarioid = ActualUsuarioid;
     }
 
@@ -101,6 +103,7 @@ public class Preferencias implements Serializable {
 
     public String loggout(){
         ActualUsuarioid="";
+        duplicado=false;
         return "main1?faces-redirect=true";
     }
 
@@ -108,6 +111,7 @@ public class Preferencias implements Serializable {
         try{
             request.logout();
             request.getSession().invalidate();
+            duplicado=false;
         }catch(Exception e){
         
         }
@@ -120,6 +124,14 @@ public class Preferencias implements Serializable {
 
     public void setBuscados(ArrayList<Gif> buscados) {
         this.buscados = buscados;
+    }
+
+    public boolean isDuplicado() {
+        return duplicado;
+    }
+
+    public void setDuplicado(boolean duplicado) {
+        this.duplicado = duplicado;
     }
     
 

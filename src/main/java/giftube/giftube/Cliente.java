@@ -29,11 +29,11 @@ public class Cliente {
     @NotEmpty(message="Debes completar la contraseña")
     private String password;///< contraseña del cliente
     
-    @Size(max=20, message="El tamaño máximo del nombre es de 20 caracteres")
+    @Size(min= 3, max=20, message="El longitud mínima del nombre es de 3 caracteres y la máxima es de 20")
     @NotEmpty(message="Debes completar el nombre")
     private String nombre;///< nombre del cliente
     
-    @Size(max=30, message="El tamaño máximo de los apellidos es de 30 caracteres")
+    @Size(min=2, max=30, message="El tamaño mínimo de apellidos es 2 caracteres y el máximo es de 30")
     @NotEmpty(message="Debes completar los apellidos")
     private String apellidos;///< apellidos del cliente
     

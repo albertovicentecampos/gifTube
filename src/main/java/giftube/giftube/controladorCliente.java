@@ -60,7 +60,9 @@ public class controladorCliente implements Serializable {
                     + " Usuario: " + cliente.getUsuario());
             return "login?faces-redirect=true";
         } else {
-            return "";
+            logger.info("Cliente duplciado");
+            pref.setDuplicado(true);
+            return "singup?faces-redirect=true";
         }
     }
 
@@ -81,18 +83,15 @@ public class controladorCliente implements Serializable {
         if (clienteLogeado == null) {
             logger.info("No existe ningun cliente con el usuario: " + cliente.getUsuario());
         } else {
-            if (clienteLogeado.getPassword() != cliente.getPassword()) {
                 logger.info("Usuario " + cliente.getUsuario() + " logeado correctamente");
                 pref.setActualUsuarioid(clienteLogeado.getUsuario());
                 pref.setC(clienteLogeado);
                 return "main1?faces-redirect=true";
-            } else {
-                logger.info("Contraseña incorrecta");
             }
-        }}
+        }
         catch(Exception e){ pref.logout();
         pref.loggout();}
-        return "main1?faces-redirect=true";
+        return "login?faces-redirect=true";
     }
 
    
