@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:outputStylesheet library="css" name="main.css"/>
     <h:head class="cabecera">
         <title>Registrarse</title>
@@ -16,36 +17,40 @@
         </script>
     </h:head>
     <h:body class="grid-container">
+
         <div align="center">
             <h:form title="signup" id="fcliente" onsubmit="validarFormulario(event)" onreset="true">
                 <p:panel>
+
                     <h1>Registrarse</h1>
                     <p>Añade tus datos para registrarte</p>
-                    
+                    <c:if test="#{prefs.duplicado}">
+                        <p class="alert alert-danger" style="color: red">Usuario ya existente</p>
+                    </c:if>
                     <h:panelGrid columns="2"> 
                         <p:outputLabel for="txtNombre" value="Nombre"/>
                         <p:inputText id="txtNombre" required="true" value="#{ctrlCliente.cliente.nombre}" label="Error"></p:inputText>
-                           
-                        
+
+
                         <p:outputLabel for="txtApellidos"  value="Apellidos"/>
                         <p:inputText id="txtApellidos" required="true" value="#{ctrlCliente.cliente.apellidos}"/>
-                        
-                        
-                        
+
+
+
                         <p:outputLabel for="txtUsuario"  value="Usuario"/>
                         <p:inputText id="txtUsuario" required="true" value="#{ctrlCliente.cliente.usuario}"/>
-                        
-                        
+
+
                         <p:outputLabel  for="txtClave" value="Clave"/>
                         <p:password id="txtClave" required="true" value="#{ctrlCliente.cliente.password}"/>
-                        
-                        
-                       
+
+
+
                         <p:outputLabel  for="txtConfirma" value="Confirmar clave"/>
                         <p:password id="txtConfirma" required="true"/>
-                                                
+
                         <br />
-                        
+
                         <h:column/><h:column/>
                         <p:commandButton  value="Registrarse" ajax="false" validateClient="true" action="#{ctrlCliente.crea()}"/>
                         <br/>
@@ -55,17 +60,17 @@
                         <p:message for="txtUsuario"/>
                         <p:message for="txtClave"/>
                         <p:message for="txtConfirma"/>
-                        
+
                         <h:column/>
                     </h:panelGrid>
-                        <p style="color: red" id="errNombre"></p>
-                        <p style="color: red" id="errApellidos"></p>
-                        <p style="color: red" id="errUsuario"></p>
-                        <p style="color: red" id="errClave"></p>
-                        <p style="color: red" id="errConfirma"></p> 
+                    <p style="color: red" id="errNombre"></p>
+                    <p style="color: red" id="errApellidos"></p>
+                    <p style="color: red" id="errUsuario"></p>
+                    <p style="color: red" id="errClave"></p>
+                    <p style="color: red" id="errConfirma"></p> 
                 </p:panel>                
             </h:form>
-            
+
         </div>
     </h:body>
 

@@ -19,7 +19,7 @@
                 <ui:include src="menu.xhtml"/>
                 <c:if test="#{prefs.usuarioVacio()}">
                     <h:form title="Edicion">
-                        
+
                         <div class="ui-g">
 
                             <div class="ui-g-12 ui-md-10" align="center">
@@ -33,25 +33,31 @@
                                     <p:outputLabel value="Biografia: #{prefs.c.biografia}" id="biografia"/>
                                     <p:inputText id="txtBio" value="#{ctrlCliente.cliente.biografia}"/>
                                 </h:panelGrid>
-                                                                
+
                                 <br/>
                                 <p:commandButton value="Editar todo" ajax="false" validateClient="false" action="#{ctrlCliente.editarTodo()}"/><br/>
+                                <h:form title="BorrarCuenta">
+                                    <div class="ui-g">
+                                        <div class="ui-g-12 ui-md-1">
+                                        </div>
+                                        <div class="ui-g-12 ui-md-10" align="center">
+                                            <p:message for="botonBorrar" />
+                                            <p:commandButton id="botonBorrar" value="Borrar cuenta" ajax="false" validateClient="false" action="#{ctrlCliente.borra()}"/>
+                                        </div>
+                                    </div>
+                                </h:form>
+                                <p:message for="txtNom"/>
+                            <p:message for="txtApe"/>
+                            <p:message for="txtBio"/>
                             </div>  
+                            
+
                         </div>
-                        
+
                     </h:form>
-                    
-                    <h:form title="BorrarCuenta">
-                        <div class="ui-g">
-                            <div class="ui-g-12 ui-md-10" align="center">
-                                <p:message for="botonBorrar" />
-                                <p:commandButton id="botonBorrar" value="Borrar cuenta" ajax="false" validateClient="false" action="#{ctrlCliente.borra()}"/>
-                            </div>
-                        </div>
-                    </h:form>
-                    <p:message for="txtNom"/>
-                    <p:message for="txtApe"/>
-                    <p:message for="txtBio"/>
+
+
+
                 </c:if>
                 <c:if test="#{prefs.usuario()}">
                     <p>Debes estar logueado para poder editar</p>

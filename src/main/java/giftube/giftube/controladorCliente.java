@@ -60,7 +60,9 @@ public class controladorCliente implements Serializable {
                     + " Usuario: " + cliente.getUsuario());
             return "login?faces-redirect=true";
         } else {
-            return "";
+            logger.info("Cliente duplciado");
+            pref.setDuplicado(true);
+            return "singup?faces-redirect=true";
         }
     }
 
