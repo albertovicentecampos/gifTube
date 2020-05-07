@@ -53,7 +53,7 @@ public class GifDAOjpa implements Serializable {
         }
         return lg;
     }
-
+    
     public boolean subirGif(Gif _gif) {
         boolean subir = false;
         try {
